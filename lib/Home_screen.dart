@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: Colors.amber,
+      backgroundColor: Colors.black,
       body: Center(
         child: Stack(
           children: [
@@ -94,43 +94,46 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    // crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      SizedBox(
-                        height: height * .2,
-                      ),
-                      IconButton(
-                        icon: const Icon(
-                          Icons.menu,
-                          color: Colors.white,
+                  Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      // crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        SizedBox(
+                          height: height * .2,
                         ),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              PageTransition(
-                                  type: PageTransitionType.leftToRightWithFade,
-                                  child: const ZoomDrawerTest()));
-                        },
-                      ),
-                      Text(
-                        'Welcome back, ',
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.adventPro(
-                            color: Colors.orange,
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        ' Admin',
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.adventPro(
+                        IconButton(
+                          icon: const Icon(
+                            Icons.menu,
                             color: Colors.white,
-                            fontSize: 26,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ],
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                PageTransition(
+                                    type:
+                                        PageTransitionType.leftToRightWithFade,
+                                    child: const ZoomDrawerTest()));
+                          },
+                        ),
+                        Text(
+                          'Welcome back, ',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.adventPro(
+                              color: Colors.orange,
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          ' Admin',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.adventPro(
+                              color: Colors.white,
+                              fontSize: 26,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
                   ),
                   const Align(
                     alignment: Alignment.bottomCenter,
@@ -922,37 +925,6 @@ class LineChartSample1State extends State<LineChartSample1> {
             begin: Alignment.bottomCenter,
             end: Alignment.topCenter,
           ),
-        ),
-        child: Stack(
-          children: <Widget>[
-            const SizedBox(
-              height: 4,
-            ),
-            const Text(
-              'Monthly Sales',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 2,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(
-              height: 37,
-            ),
-            IconButton(
-              icon: Icon(
-                Icons.refresh,
-                color: Colors.white.withOpacity(isShowingMainData ? 1.0 : 0.5),
-              ),
-              onPressed: () {
-                setState(() {
-                  isShowingMainData = !isShowingMainData;
-                });
-              },
-            )
-          ],
         ),
       ),
     );
