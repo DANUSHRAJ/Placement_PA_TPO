@@ -81,8 +81,8 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: height * .25,
-                          child: Container(child: const CustomCarouselFB2()),
+                          height: height * .23,
+                          child: const CustomCarouselFB2(),
                         ),
                         // SizedBox(
                         //   height: height * .25,
@@ -476,11 +476,11 @@ class CardFb1 extends StatelessWidget {
             fit: BoxFit.cover,
           ),
           color: Colors.black,
-          borderRadius: BorderRadius.circular(14.5),
+          borderRadius: BorderRadius.circular(25.5),
           boxShadow: [
             BoxShadow(
                 offset: const Offset(10, 20),
-                blurRadius: 10,
+                blurRadius: 0,
                 spreadRadius: 0,
                 color: Colors.black.withOpacity(.5)),
           ],
