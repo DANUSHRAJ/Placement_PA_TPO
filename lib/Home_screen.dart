@@ -8,6 +8,7 @@ import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'Widgets/webview.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -57,6 +58,7 @@ class HomeScreen extends StatelessWidget {
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
+
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: SizedBox(
@@ -217,8 +219,8 @@ class _BottomNavBarCurvedFb1State extends State<BottomNavBarCurvedFb1> {
                     defaultColor: secondaryColor,
                     selectedColor: primaryColor),
                 NavBarIcon(
-                  text: "Calendar",
-                  icon: Icons.date_range_outlined,
+                  text: "History",
+                  icon: Icons.history_edu_outlined,
                   selected: false,
                   onPressed: () {},
                   selectedColor: primaryColor,
@@ -590,8 +592,10 @@ class DrawerFb1 extends StatelessWidget {
         break;
       case 1:
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const Scaffold(), // Page 2
-        ));
+            builder: (BuildContext context) => MyWebView(
+                  title: "GoogleForms",
+                  selectedUrl: "https://www.google.com/forms/about/",
+                )));
         break;
     }
   }
