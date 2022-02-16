@@ -8,6 +8,7 @@ import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'Screens/Intership.dart';
 import 'Widgets/webview.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -206,7 +207,13 @@ class _BottomNavBarCurvedFb1State extends State<BottomNavBarCurvedFb1> {
                   text: "Interships",
                   icon: Icons.celebration_outlined,
                   selected: false,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        PageTransition(
+                            type: PageTransitionType.bottomToTop,
+                            child: const Intership()));
+                  },
                   defaultColor: secondaryColor,
                   selectedColor: primaryColor,
                 ),
