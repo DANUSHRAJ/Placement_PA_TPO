@@ -98,11 +98,26 @@ class _IntershipState extends State<Intership> {
                     SizedBox(height: height * .13),
                     CardFb1(text: "Explore", onPressed: () {}),
                     Divider(
-                        //height: height * .,
-                        thickness: 5,
-                        indent: 5,
-                        endIndent: 5,
+                        thickness: 2,
+                        indent: 15,
+                        endIndent: 15,
                         color: Colors.white),
+                    Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: Text('Total: ',
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.adventPro(
+                                  fontSize: 25,
+                                  color: Colors.orange,
+                                )))),
+                    Divider(
+                        thickness: 2,
+                        indent: 15,
+                        endIndent: 15,
+                        color: Colors.white),
+                    CardFb2(text: "Explore", onPressed: () {}),
                   ]))
                 ])),
           )
@@ -169,6 +184,88 @@ Widget _DropBox(String title, List<NewObject> key, int i) {
 }
 
 setState(Null Function() param0) {}
+
+class CardFb2 extends StatelessWidget {
+  final String text;
+  // final String imageUrl;
+  // final String subtitle;
+  final Function() onPressed;
+
+  const CardFb2({required this.text, required this.onPressed, Key? key})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          width: 400,
+          height: 300,
+          padding: const EdgeInsets.all(15.0),
+          decoration: BoxDecoration(
+            color: Colors.black.withOpacity(0.2),
+            borderRadius: BorderRadius.circular(12.5),
+            boxShadow: [
+              BoxShadow(
+                  offset: const Offset(10, 20),
+                  blurRadius: 10,
+                  spreadRadius: 0,
+                  color: Colors.grey.withOpacity(.05)),
+            ],
+          ),
+          child: Column(
+            children: [
+              //Image.network(imageUrl, height: 59, fit: BoxFit.cover),
+              Row(
+                children: [
+                  Column(
+                    children: [
+                      _DropBox("Batch", title, 0),
+                      _DropBox("Dept", department, 1),
+                    ],
+                  ),
+                  FloatingActionButton(onPressed: onPressed)
+                ],
+              ),
+
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: "PART B",
+                        hintStyle: TextStyle(color: Colors.white),
+                        //border: InputBorder.
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  FloatingActionButton(
+                    onPressed: () {},
+                    child: Icon(
+                      Icons.send,
+                      color: Colors.white,
+                      size: 18,
+                    ),
+                    backgroundColor: Colors.orangeAccent,
+                    elevation: 0,
+                  ),
+                ],
+              ),
+              // const SizedBox(
+              //       height: 5,
+              //     ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 class CardFb1 extends StatelessWidget {
   final String text;
