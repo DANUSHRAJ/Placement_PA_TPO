@@ -35,14 +35,12 @@ class HomeScreen extends StatelessWidget {
               child: Align(
                 alignment: Alignment.topLeft,
                 child: Stack(children: <Widget>[
-                  Container(
-                    child: Divider(
-                        height: height * .3,
-                        thickness: 5,
-                        indent: 5,
-                        endIndent: 5,
-                        color: Colors.orange.withOpacity(.5)),
-                  ),
+                  Divider(
+                      height: height * .3,
+                      thickness: 5,
+                      indent: 5,
+                      endIndent: 5,
+                      color: Colors.orange.withOpacity(.5)),
 
                   SingleChildScrollView(
                     child: Column(

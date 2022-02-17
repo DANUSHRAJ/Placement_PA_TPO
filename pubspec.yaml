@@ -45,6 +45,7 @@ dependencies:
   webview_flutter: ^3.0.0
   footer: ^0.0.4
   unicorndial: ^1.1.5
+  flutter_neumorphic: ^3.2.0
 
 dev_dependencies:
   flutter_test:
@@ -77,6 +78,7 @@ flutter:
     - assets/images/toggle_bg.jpg
     - assets/images/profile.json
     - assets/images/toggle_bg1.png
+    - assets/images/download.json
 
    
 
