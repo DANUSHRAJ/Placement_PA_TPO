@@ -46,6 +46,10 @@ List<NewObject> dropbox = <NewObject>[
   department.first, //1
 ];
 
+final RegNo = List<String>.generate(10, (i) => 'RegNo: $i');
+final Names = List<String>.generate(10, (i) => 'Name: $i');
+int len = RegNo.length;
+
 class _IntershipState extends State<Intership> {
   Widget _backButton() {
     return InkWell(
@@ -84,7 +88,7 @@ class _IntershipState extends State<Intership> {
           ),
           centerTitle: true,
           leading: _backButton(),
-          backgroundColor: Colors.transparent,
+          backgroundColor: Colors.black,
           elevation: 0,
         ),
         body: Container(
@@ -114,7 +118,7 @@ class _IntershipState extends State<Intership> {
                         padding: const EdgeInsets.all(4.0),
                         child: Align(
                             alignment: Alignment.centerLeft,
-                            child: Text('Total: ',
+                            child: Text('Total: $len',
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.adventPro(
                                   fontSize: 25,
@@ -207,7 +211,7 @@ class CardFb2 extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Container(
             width: 400,
-            height: 300,
+            height: 500,
             decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
@@ -261,35 +265,50 @@ class CardFb2 extends StatelessWidget {
                       indent: 8,
                       endIndent: 8,
                       color: Colors.white),
-                  // Row(
-                  //   children: [
-                  //     const Expanded(
-                  //       child: const TextField(
-                  //         decoration: InputDecoration(
-                  //           hintText: "PART B",
-                  //           hintStyle: TextStyle(color: Colors.white),
-                  //           //border: InputBorder.
-                  //         ),
-                  //       ),
-                  //     ),
-                  //     const SizedBox(
-                  //       width: 15,
-                  //     ),
-                  //     FloatingActionButton(
-                  //       onPressed: () {},
-                  //       child: const Icon(
-                  //         Icons.send,
-                  //         color: Colors.white,
-                  //         size: 18,
-                  //       ),
-                  //       backgroundColor: Colors.orangeAccent,
-                  //       elevation: 0,
-                  //     ),
-                  //   ],
-                  // ),
-                  // const SizedBox(
-                  //       height: 5,
-                  //     ),
+                  Flexible(
+                    child: ListView.builder(
+                        itemCount: RegNo.length,
+                        //reverse: true,
+                        shrinkWrap: false,
+                        // display each item of the product list
+                        itemBuilder: (context, index) {
+                          return Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Card(
+                                color: Colors.black.withOpacity(0.3),
+                                elevation: 10,
+                                key: UniqueKey(),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          RegNo[index],
+                                          style: GoogleFonts.adventPro(
+                                              fontSize: 15,
+                                              color: Colors.orangeAccent,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 100,
+                                      ),
+                                      Text(
+                                        Names[index],
+                                        style: GoogleFonts.adventPro(
+                                            fontSize: 15,
+                                            color: Colors.yellowAccent,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ));
+                        }),
+                  ),
                 ],
               ),
             ),
@@ -375,7 +394,7 @@ class CardFb1 extends StatelessWidget {
                 Row(
                   children: [
                     const Expanded(
-                      child: const TextField(
+                      child: TextField(
                         decoration: InputDecoration(
                           hintText: "Send to mail...",
                           hintStyle: TextStyle(color: Colors.white),

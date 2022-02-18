@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(title: 'SJIT_ADMIN'),
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: true,
     );
   }
 }

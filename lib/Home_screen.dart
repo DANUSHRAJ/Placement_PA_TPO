@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:admin_sjit_pp/Screens/History.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -227,7 +228,13 @@ class _BottomNavBarCurvedFb1State extends State<BottomNavBarCurvedFb1> {
                   text: "History",
                   icon: Icons.history_edu_outlined,
                   selected: false,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        PageTransition(
+                            type: PageTransitionType.bottomToTop,
+                            child: const History()));
+                  },
                   selectedColor: primaryColor,
                   defaultColor: secondaryColor,
                 )
