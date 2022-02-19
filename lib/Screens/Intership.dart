@@ -115,13 +115,14 @@ class _IntershipState extends State<Intership> {
                         endIndent: 15,
                         color: Colors.white),
                     Padding(
-                        padding: const EdgeInsets.all(4.0),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 5),
                         child: Align(
                             alignment: Alignment.centerLeft,
                             child: Text('Total: $len',
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.adventPro(
-                                  fontSize: 25,
+                                  fontSize: 18,
                                   color: Colors.orange,
                                   fontWeight: FontWeight.bold,
                                 )))),
@@ -138,17 +139,19 @@ class _IntershipState extends State<Intership> {
   }
 }
 
+// ignore: non_constant_identifier_names
 Widget _DropBox(String title, List<NewObject> key, int i) {
   return Container(
-    margin: const EdgeInsets.symmetric(vertical: 10),
-    width: 250,
+    margin: const EdgeInsets.all(5),
+    width: 220,
     child: Column(
+      mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
           title,
           style: GoogleFonts.portLligatSans(
-            fontSize: 20,
+            fontSize: 15,
             fontWeight: FontWeight.bold,
             color: Colors.limeAccent,
           ),
@@ -157,7 +160,7 @@ Widget _DropBox(String title, List<NewObject> key, int i) {
           height: 10,
         ),
         Container(
-          width: 180,
+          width: 150,
           // padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
@@ -177,7 +180,7 @@ Widget _DropBox(String title, List<NewObject> key, int i) {
                               item.title,
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                                fontSize: 18,
                               ),
                             ),
                           ],
@@ -232,39 +235,45 @@ class CardFb2 extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  Row(
-                    children: [
-                      Column(
-                        children: [
-                          _DropBox("Batch", title, 0),
-                          _DropBox("Dept", department, 1),
-                        ],
-                      ),
-                      //FloatingActionButton(onPressed: onPressed),
-                      NeumorphicButton(
-                        margin: EdgeInsets.all(12),
-                        onPressed: () {},
-                        style: NeumorphicStyle(
-                            shape: NeumorphicShape.flat,
-                            boxShape: NeumorphicBoxShape.roundRect(
-                                BorderRadius.circular(15)),
-                            border: NeumorphicBorder(color: Colors.orange)),
-                        padding: const EdgeInsets.all(12.0),
-                        child: Text(
-                          "  View  ",
-                          style: GoogleFonts.adventPro(
-                              fontSize: 15,
-                              color: _textColor(context),
-                              fontWeight: FontWeight.bold),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        Column(
+                          children: [
+                            _DropBox("Batch", title, 0),
+                            _DropBox("Dept", department, 1),
+                          ],
                         ),
-                      ),
-                    ],
+                        //FloatingActionButton(onPressed: onPressed),
+                        NeumorphicButton(
+                          // margin: EdgeInsets.all(),
+                          onPressed: () {},
+                          style: NeumorphicStyle(
+                              shape: NeumorphicShape.flat,
+                              boxShape: NeumorphicBoxShape.roundRect(
+                                  BorderRadius.circular(15)),
+                              border: NeumorphicBorder(color: Colors.orange)),
+                          padding: const EdgeInsets.all(12.0),
+                          child: Text(
+                            "  VIEW  ",
+                            style: GoogleFonts.adventPro(
+                                fontSize: 15,
+                                color: _textColor(context),
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  const Divider(
-                      thickness: 2,
-                      indent: 8,
-                      endIndent: 8,
-                      color: Colors.white),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: const Divider(
+                        thickness: 2,
+                        indent: 8,
+                        endIndent: 8,
+                        color: Colors.white),
+                  ),
                   Flexible(
                     child: ListView.builder(
                         itemCount: RegNo.length,
@@ -363,59 +372,72 @@ class CardFb1 extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                Row(
-                  children: [
-                    Column(
-                      children: [
-                        _DropBox("Batch", title, 0),
-                        _DropBox("Dept", department, 1),
-                      ],
-                    ),
-                    NeumorphicButton(
-                      margin: EdgeInsets.all(12),
-                      onPressed: () {},
-                      style: NeumorphicStyle(
-                          shape: NeumorphicShape.flat,
-                          boxShape: NeumorphicBoxShape.roundRect(
-                              BorderRadius.circular(15)),
-                          border: NeumorphicBorder(color: Colors.orange)),
-                      padding: const EdgeInsets.all(12.0),
-                      child: Text(
-                        "DOWNLOAD",
-                        style: GoogleFonts.adventPro(
-                            fontSize: 15,
-                            color: _textColor(context),
-                            fontWeight: FontWeight.bold),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      Column(
+                        children: [
+                          _DropBox("Batch", title, 0),
+                          _DropBox("Dept", department, 1),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
-
-                Row(
-                  children: [
-                    const Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: "Send to mail...",
-                          hintStyle: TextStyle(color: Colors.white),
-                          //border: InputBorder.
+                      NeumorphicButton(
+                        //   margin: EdgeInsets.all(12),
+                        onPressed: () {},
+                        style: NeumorphicStyle(
+                            shape: NeumorphicShape.flat,
+                            boxShape: NeumorphicBoxShape.roundRect(
+                                BorderRadius.circular(15)),
+                            border: NeumorphicBorder(color: Colors.orange)),
+                        padding: const EdgeInsets.all(12.0),
+                        child: Text(
+                          "DOWNLOAD",
+                          style: GoogleFonts.adventPro(
+                              fontSize: 15,
+                              color: _textColor(context),
+                              fontWeight: FontWeight.bold),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    FloatingActionButton(
-                      onPressed: () {},
-                      child: const Icon(
-                        Icons.send,
-                        color: Colors.white,
-                        size: 18,
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: const Divider(
+                      thickness: 2,
+                      indent: 15,
+                      endIndent: 15,
+                      color: Colors.white),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      const Expanded(
+                        child: TextField(
+                          decoration: InputDecoration(
+                            hintText: "Send to mail...",
+                            hintStyle: TextStyle(color: Colors.white),
+                            //border: InputBorder.
+                          ),
+                        ),
                       ),
-                      backgroundColor: Colors.orangeAccent,
-                      elevation: 0,
-                    ),
-                  ],
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      FloatingActionButton(
+                        onPressed: () {},
+                        child: const Icon(
+                          Icons.send,
+                          color: Colors.white,
+                          size: 18,
+                        ),
+                        backgroundColor: Colors.orangeAccent,
+                        elevation: 0,
+                      ),
+                    ],
+                  ),
                 ),
                 // const SizedBox(
                 //       height: 5,
