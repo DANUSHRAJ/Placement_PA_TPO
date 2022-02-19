@@ -76,7 +76,7 @@ class HomeScreen extends StatelessWidget {
                               'Toggle Menu',
                               textAlign: TextAlign.center,
                               style: GoogleFonts.adventPro(
-                                  fontSize: 25,
+                                  fontSize: 20,
                                   color: Colors.orange,
                                   fontWeight: FontWeight.bold),
                             ),
@@ -122,16 +122,16 @@ class HomeScreen extends StatelessWidget {
                           'Welcome back, ',
                           textAlign: TextAlign.center,
                           style: GoogleFonts.adventPro(
-                              color: Colors.orange,
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold),
+                            color: Colors.orange,
+                            fontSize: 17,
+                          ),
                         ),
                         Text(
                           ' Admin',
                           textAlign: TextAlign.center,
                           style: GoogleFonts.adventPro(
                               color: Colors.white,
-                              fontSize: 26,
+                              fontSize: 20,
                               fontWeight: FontWeight.bold),
                         ),
                       ],
@@ -365,8 +365,8 @@ class NavBarIcon extends StatelessWidget {
         Text(
           text,
           style: TextStyle(
-              fontSize: 12,
-              height: .1,
+              fontSize: 10,
+              //height: .1,
               color: selected ? Colors.amber : Colors.grey.withOpacity(.75)),
         )
       ],
@@ -509,17 +509,14 @@ class CardFb1 extends StatelessWidget {
               textAlign: TextAlign.justify,
               style: GoogleFonts.adventPro(
                   color: Colors.black,
-                  fontSize: 20,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold),
             ),
 
             const Text(
               '__ __',
               textAlign: TextAlign.center,
-              style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25),
+              style: TextStyle(color: Colors.black, fontSize: 18),
             ),
             SwitchScreen(),
             // const SizedBox(
