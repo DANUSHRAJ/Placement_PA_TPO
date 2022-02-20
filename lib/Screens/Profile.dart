@@ -1,4 +1,3 @@
-
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -72,7 +71,6 @@ class _ProfileHomeState extends State<ProfileHome> {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
@@ -92,15 +90,15 @@ class _ProfileHomeState extends State<ProfileHome> {
           child: Container(
             decoration: const BoxDecoration(
                 gradient: LinearGradient(
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomLeft,
-                  colors: [Colors.black, Colors.blueGrey, Colors.black],
-                )),
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [Colors.black, Colors.blueGrey, Colors.black],
+            )),
             child: SingleChildScrollView(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                  CardFb1(text: "Explore", onPressed: () {}),
+                  const CardFb1(),
                   const Divider(
                       thickness: 2,
                       indent: 15,
@@ -111,7 +109,7 @@ class _ProfileHomeState extends State<ProfileHome> {
                           horizontal: 10, vertical: 5),
                       child: Align(
                           alignment: Alignment.centerLeft,
-                          child: Text('Total: $len $height',
+                          child: Text('Total: $len',
                               textAlign: TextAlign.center,
                               style: GoogleFonts.adventPro(
                                 fontSize: 18,
@@ -123,18 +121,17 @@ class _ProfileHomeState extends State<ProfileHome> {
                       indent: 15,
                       endIndent: 15,
                       color: Colors.white),
-                  CardFb2(onPressed: () {}),
+                  const CardFb2(),
                 ])),
           ),
         ));
   }
 }
 
-// ignore: non_constant_identifier_names
-Widget _DropBox(context,String title, List<NewObject> key, int i) {
+Widget _dropBox(context, String title, List<NewObject> key, int i) {
   return Container(
     margin: const EdgeInsets.all(5),
-    width: MediaQuery.of(context).size.width*0.90,
+    width: MediaQuery.of(context).size.width * 0.90,
     child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -148,10 +145,10 @@ Widget _DropBox(context,String title, List<NewObject> key, int i) {
           ),
         ),
         SizedBox(
-          height: MediaQuery.of(context).size.height*0.01,
+          height: MediaQuery.of(context).size.height * 0.01,
         ),
         Container(
-          width: MediaQuery.of(context).size.width*0.44,
+          width: MediaQuery.of(context).size.width * 0.44,
           // padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
@@ -160,27 +157,28 @@ Widget _DropBox(context,String title, List<NewObject> key, int i) {
           ),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<NewObject>(
-              value: dropbox.elementAt(i), // currently selected item
-              items: key
-                  .map((item) => DropdownMenuItem<NewObject>(
-                child: Row(
-                  children: [
-                    Icon(item.icon),
-                    SizedBox(width: MediaQuery.of(context).size.height*0.005),
-                    Text(
-                      item.title,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                    ),
-                  ],
-                ),
-                value: item,
-              ))
-                  .toList(),
-              onChanged: null
-            ),
+                value: dropbox.elementAt(i), // currently selected item
+                items: key
+                    .map((item) => DropdownMenuItem<NewObject>(
+                          child: Row(
+                            children: [
+                              Icon(item.icon),
+                              SizedBox(
+                                  width: MediaQuery.of(context).size.height *
+                                      0.005),
+                              Text(
+                                item.title,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ],
+                          ),
+                          value: item,
+                        ))
+                    .toList(),
+                onChanged: (value) {}),
           ),
         )
       ],
@@ -191,9 +189,7 @@ Widget _DropBox(context,String title, List<NewObject> key, int i) {
 //setState(Null Function() param0) {}
 
 class CardFb2 extends StatelessWidget {
-  final Function() onPressed;
-
-  const CardFb2({required this.onPressed, Key? key}) : super(key: key);
+  const CardFb2({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -230,8 +226,8 @@ class CardFb2 extends StatelessWidget {
                   flex: 3,
                   child: Column(
                     children: [
-                      _DropBox(context,"Batch", title, 0),
-                      _DropBox(context,"Dept", department, 1),
+                      _dropBox(context, "Batch", title, 0),
+                      _dropBox(context, "Dept", department, 1),
                     ],
                   ),
                 ),
@@ -258,42 +254,39 @@ class CardFb2 extends StatelessWidget {
               ],
             ),
             const Divider(
-                thickness: 2,
-                indent: 8,
-                endIndent: 8,
-                color: Colors.white),
-          Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Card(
-                color: Colors.black.withOpacity(0.3),
-                elevation: 10,
-                key: UniqueKey(),
-                child: Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          "REG NO",
+                thickness: 2, indent: 8, endIndent: 8, color: Colors.white),
+            Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Card(
+                  color: Colors.black.withOpacity(0.3),
+                  elevation: 10,
+                  key: UniqueKey(),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "REG NO",
+                            style: GoogleFonts.adventPro(
+                                fontSize: 15,
+                                color: Colors.orangeAccent,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        Text(
+                          "STATUS",
                           style: GoogleFonts.adventPro(
                               fontSize: 15,
-                              color: Colors.orangeAccent,
+                              color: Colors.yellowAccent,
                               fontWeight: FontWeight.bold),
                         ),
-                      ),
-                      Text(
-                        "STATUS",
-                        style: GoogleFonts.adventPro(
-                            fontSize: 15,
-                            color: Colors.yellowAccent,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              )),
+                )),
             Flexible(
               flex: 10,
               child: ListView.builder(
@@ -352,16 +345,12 @@ class CardFb2 extends StatelessWidget {
 }
 
 class CardFb1 extends StatelessWidget {
-  final String text;
-  final Function() onPressed;
-
-  const CardFb1({required this.text, required this.onPressed, Key? key})
-      : super(key: key);
+  const CardFb1({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(6.0),
       margin: const EdgeInsets.all(10.0),
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
@@ -383,46 +372,40 @@ class CardFb1 extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Container(
-            margin: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Flexible(
-                  flex: 3,
-                  child: Column(
-                    children: [
-                      _DropBox(context,"Batch", title, 0),
-                      _DropBox(context,"Dept", department, 1),
-                    ],
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Flexible(
+                flex: 5,
+                child: Column(
+                  children: [
+                    _dropBox(context, "Batch", title, 0),
+                    _dropBox(context, "Dept", department, 1),
+                  ],
+                ),
+              ),
+              Flexible(
+                flex: 4,
+                child: NeumorphicButton(
+                  onPressed: () {},
+                  style: NeumorphicStyle(
+                      shape: NeumorphicShape.flat,
+                      boxShape: NeumorphicBoxShape.roundRect(
+                          BorderRadius.circular(15)),
+                      border: const NeumorphicBorder(color: Colors.orange)),
+                  child: Text(
+                    "DOWNLOAD",
+                    style: GoogleFonts.adventPro(
+                        fontSize: 15,
+                        color: _textColor(context),
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
-                Flexible(
-                  flex: 2,
-                  child: NeumorphicButton(
-                    onPressed: () {},
-                    style: NeumorphicStyle(
-                        shape: NeumorphicShape.flat,
-                        boxShape: NeumorphicBoxShape.roundRect(
-                            BorderRadius.circular(15)),
-                        border: const NeumorphicBorder(color: Colors.orange)),
-                    child: Text(
-                      "DOWNLOAD",
-                      style: GoogleFonts.adventPro(
-                          fontSize: 15,
-                          color: _textColor(context),
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
           const Divider(
-              thickness: 2,
-              indent: 15,
-              endIndent: 15,
-              color: Colors.white),
+              thickness: 2, indent: 15, endIndent: 15, color: Colors.white),
           Container(
             margin: const EdgeInsets.all(8.0),
             child: Row(
