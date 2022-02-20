@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:admin_sjit_pp/Screens/History.dart';
+import 'package:admin_sjit_pp/Screens/Profile.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -547,7 +548,7 @@ class DrawerFb1 extends StatelessWidget {
                   const SearchFieldDrawer(),
                   const SizedBox(height: 12),
                   MenuItem(
-                    text: 'People',
+                    text: 'Profile',
                     icon: Icons.people,
                     onClicked: () => selectedItem(context, 0),
                   ),
@@ -596,7 +597,7 @@ class DrawerFb1 extends StatelessWidget {
     switch (index) {
       case 0:
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const Scaffold(), // Page 1
+          builder: (context) => const ProfileHome(), // Page 1
         ));
         break;
       case 1:
