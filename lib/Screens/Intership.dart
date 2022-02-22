@@ -91,51 +91,52 @@ class _IntershipState extends State<Intership> {
           backgroundColor: Color.fromRGBO(30, 9, 23, 1).withOpacity(0.5),
           elevation: 0,
         ),
-        body: Container(
-            child: Stack(children: [
-          Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            decoration: const BoxDecoration(
-                gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              colors: [Colors.black, Colors.blueGrey, Colors.black],
-            )),
-            child: Align(
-                alignment: Alignment.topLeft,
-                child: Stack(children: <Widget>[
-                  SingleChildScrollView(
-                      child: Column(children: [
-                    SizedBox(height: height * .13),
-                    CardFb1(text: "Explore", onPressed: () {}),
-                    const Divider(
-                        thickness: 2,
-                        indent: 15,
-                        endIndent: 15,
-                        color: Colors.white),
-                    Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 5),
-                        child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text('Total: $len',
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.adventPro(
-                                  fontSize: 18,
-                                  color: Colors.orange,
-                                  fontWeight: FontWeight.bold,
-                                )))),
-                    const Divider(
-                        thickness: 2,
-                        indent: 15,
-                        endIndent: 15,
-                        color: Colors.white),
-                    CardFb2(onPressed: () {}),
-                  ]))
-                ])),
-          )
-        ])));
+        body: SafeArea(
+          child: Container(
+              child: Stack(children: [
+            Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [Colors.black, Colors.blueGrey, Colors.black],
+              )),
+              child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Stack(children: <Widget>[
+                    SingleChildScrollView(
+                        child: Column(children: [
+                      CardFb1(text: "Explore", onPressed: () {}),
+                      const Divider(
+                          thickness: 2,
+                          indent: 15,
+                          endIndent: 15,
+                          color: Colors.white),
+                      Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 5),
+                          child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text('Total: $len',
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.adventPro(
+                                    fontSize: 18,
+                                    color: Colors.orange,
+                                    fontWeight: FontWeight.bold,
+                                  )))),
+                      const Divider(
+                          thickness: 2,
+                          indent: 15,
+                          endIndent: 15,
+                          color: Colors.white),
+                      CardFb2(onPressed: () {}),
+                    ]))
+                  ])),
+            )
+          ])),
+        ));
   }
 }
 
