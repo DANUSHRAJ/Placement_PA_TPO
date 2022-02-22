@@ -1,6 +1,8 @@
 import 'dart:ui';
 import 'package:admin_sjit_pp/Widgets/submit_bttn.dart';
 import 'package:lottie/lottie.dart';
+import 'package:simple_animations/multi_tween/multi_tween.dart';
+import 'package:simple_animations/simple_animations.dart';
 
 import 'Widgets/email.dart';
 import 'package:admin_sjit_pp/Home_screen.dart';
@@ -8,7 +10,7 @@ import 'package:admin_sjit_pp/main.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:supercharged/supercharged.dart';
 import 'Widgets/password.dart';
 
 class LoginPage extends StatefulWidget {
@@ -45,6 +47,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
+        backgroundColor: Color.fromRGBO(30, 9, 23, 1),
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           title: Text(
@@ -65,12 +68,12 @@ class _LoginPageState extends State<LoginPage> {
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
               colors: [Colors.black, Colors.blueGrey, Colors.black],
-            )
-                // image: DecorationImage(
-                //   image: AssetImage("assets/images/bg.jpg"),
-                //   fit: BoxFit.cover,
-                // ),
-                ),
+            )),
+            //     // image: DecorationImage(
+            //     //   image: AssetImage("assets/images/bg.jpg"),
+            //     //   fit: BoxFit.cover,
+            //     // ),
+            //     ),
             child: Stack(children: <Widget>[
               SingleChildScrollView(
                 child: Container(
@@ -82,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(height: height * .05),
                       Align(
                         alignment: Alignment.topCenter,
-                        child: Lottie.asset("assets/images/login.json",
+                        child: Lottie.asset("assets/images/landing1.json",
                             height: 350, width: 350, fit: BoxFit.contain),
                       ),
                       Align(
@@ -96,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                               inputController: loginPassController)),
                       SizedBox(height: height * .1),
                       Align(
-                          alignment: Alignment.centerRight,
+                          alignment: Alignment.bottomRight,
                           child: SubmitBttn()),
                     ],
                   ),

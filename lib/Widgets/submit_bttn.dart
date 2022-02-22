@@ -19,24 +19,27 @@ class _SubmitBttnState extends State<SubmitBttn> {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => HomeScreen()));
         },
-        child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-          RichText(
-            textAlign: TextAlign.center,
-            text: TextSpan(
-              style: GoogleFonts.adventPro(
-                  fontSize: 30,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
-              children: [
-                TextSpan(text: "Sign in"),
-                WidgetSpan(
-                  child: Icon(Icons.arrow_right_alt_outlined,
-                      size: 30, color: Colors.white),
-                ),
-              ],
+        child: Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
+            RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                style: GoogleFonts.adventPro(
+                    fontSize: 30,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+                children: [
+                  TextSpan(text: "Sign in"),
+                  WidgetSpan(
+                    child: Icon(Icons.arrow_right_alt_outlined,
+                        size: 30, color: Colors.white),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ]),
+          ]),
+        ),
       ),
     );
   }

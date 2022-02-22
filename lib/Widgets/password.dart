@@ -8,13 +8,13 @@ class PasswordInputFieldFb3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(boxShadow: [
-        BoxShadow(
-            offset: const Offset(12, 26),
-            blurRadius: 50,
-            spreadRadius: 10,
-            color: Colors.white.withOpacity(.2)),
-      ]),
+      // decoration: BoxDecoration(boxShadow: [
+      //   BoxShadow(
+      //       offset: const Offset(12, 26),
+      //       blurRadius: 50,
+      //       spreadRadius: 10,
+      //       color: Colors.yellow.withOpacity(.2)),
+      // ]),
       child: TextField(
         obscureText: true,
         controller: inputController,

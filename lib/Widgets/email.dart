@@ -8,13 +8,13 @@ class EmailInputFieldFb3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(boxShadow: [
-        BoxShadow(
-            offset: const Offset(12, 26),
-            blurRadius: 50,
-            spreadRadius: 10,
-            color: Colors.white.withOpacity(.2)),
-      ]),
+      // decoration: BoxDecoration(boxShadow: [
+      //   BoxShadow(
+      //       offset: const Offset(12, 26),
+      //       blurRadius: 50,
+      //       spreadRadius: 0,
+      //       color: Colors.yellow.withOpacity(.25)),
+      // ]),
       child: TextField(
         controller: inputController,
         onChanged: (value) {
