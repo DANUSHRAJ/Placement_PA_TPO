@@ -88,7 +88,7 @@ class _IntershipState extends State<Intership> {
           ),
           centerTitle: true,
           leading: _backButton(),
-          backgroundColor: Color.fromRGBO(30, 9, 23, 1).withOpacity(0.5),
+          backgroundColor: Color.fromRGBO(30, 9, 23, 1),
           elevation: 0,
         ),
         body: SafeArea(
