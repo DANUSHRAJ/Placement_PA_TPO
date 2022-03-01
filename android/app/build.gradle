@@ -46,6 +46,7 @@ android {
         applicationId "com.example.admin_sjit_pp"
         minSdkVersion 19
       //  minSdkVersion flutter.minSdkVersion
+        multiDexEnabled true
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
