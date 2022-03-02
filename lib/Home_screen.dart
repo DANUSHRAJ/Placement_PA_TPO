@@ -410,7 +410,7 @@ class _CustomCarouselFB2State extends State<CustomCarouselFB2> {
         subtitle: "__ __",
         onPressed: () {}),
     CardFb1(
-        text: "INTERSHIPS",
+        text: "INTERNSHIPS",
         imageUrl: "https://assets3.lottiefiles.com/packages/lf20_m0ze3ipv.json",
         subtitle: "__ ___",
         onPressed: () {}),

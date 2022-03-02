@@ -32,7 +32,7 @@ class _FormHomeState extends State<FormHome> {
                       builder: (context) =>  AlertDialog(
                         title:  const Text('Create New Form'),
                         content: TextField(
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             labelText: 'Title',
                           ),
@@ -50,7 +50,7 @@ class _FormHomeState extends State<FormHome> {
                                 date:[
                                   title,
                                   [
-                                    {'type':'Question','pos':1,'ques':'What is your age?'}
+                                    {'type':'Question','pos':1,'ques':'Enter your Question'}
                                   ],
                                 ],
                               };
