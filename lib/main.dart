@@ -57,43 +57,50 @@ class SplashScreenState extends State<MyHomePage> {
             // )),
             child: Stack(
               children: <Widget>[
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: FadeAnimation(
-                      1,
-                      Container(
-                        height: 400,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage('assets/images/one.png'),
-                                fit: BoxFit.cover)),
-                      )),
-                ),
-                Positioned(
-                  top: -100,
-                  left: 0,
-                  child: FadeAnimation(
-                      1.3,
-                      Container(
-                        height: 400,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage('assets/images/one.png'),
-                                fit: BoxFit.cover)),
-                      )),
-                ),
-                Positioned(
-                  top: -150,
-                  left: 0,
-                  child: FadeAnimation(
-                      1.6,
-                      Container(
-                        height: 400,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage('assets/images/one.png'),
-                                fit: BoxFit.cover)),
-                      )),
+                // Align(
+                //   alignment: Alignment.topCenter,
+                //   child: FadeAnimation(
+                //       1,
+                //       Container(
+                //         height: 400,
+                //         decoration: BoxDecoration(
+                //             image: DecorationImage(
+                //                 image: AssetImage('assets/images/one.png'),
+                //                 fit: BoxFit.cover)),
+                //       )),
+                // ),
+                // Positioned(
+                //   top: -100,
+                //   left: 0,
+                //   child: FadeAnimation(
+                //       1.3,
+                //       Container(
+                //         height: 400,
+                //         decoration: BoxDecoration(
+                //             image: DecorationImage(
+                //                 image: AssetImage('assets/images/one.png'),
+                //                 fit: BoxFit.cover)),
+                //       )),
+                // ),
+                // Positioned(
+                //   top: -150,
+                //   left: 0,
+                //   child: FadeAnimation(
+                //       1.6,
+                //       Container(
+                //         height: 400,
+                //         decoration: BoxDecoration(
+                //             image: DecorationImage(
+                //                 image: AssetImage('assets/images/one.png'),
+                //                 fit: BoxFit.cover)),
+                //       )),
+                // ),
+
+                Container(
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/images/Bg.jpeg'),
+                          fit: BoxFit.cover)),
                 ),
                 Align(
                     alignment: Alignment.bottomCenter,

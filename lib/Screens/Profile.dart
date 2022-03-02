@@ -87,13 +87,17 @@ class _ProfileHomeState extends State<ProfileHome> {
           backgroundColor: Colors.black,
         ),
         body: SafeArea(
-          child: Container(
-            decoration: const BoxDecoration(
-                gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              colors: [Colors.black, Colors.blueGrey, Colors.black],
-            )),
+            child: Container(
+                child: Stack(children: [
+          Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/images/Bg.jpeg'),
+                    fit: BoxFit.cover)),
+          ),
+          Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
             child: SingleChildScrollView(
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -124,7 +128,7 @@ class _ProfileHomeState extends State<ProfileHome> {
                   const CardFb2(),
                 ])),
           ),
-        ));
+        ]))));
   }
 }
 

@@ -31,15 +31,21 @@ class HomeScreen extends StatelessWidget {
             Container(
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
-              decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                colors: [Colors.black, Colors.blueGrey, Colors.black],
-              )),
+              // decoration: const BoxDecoration(
+              //     gradient: LinearGradient(
+              //   begin: Alignment.topRight,
+              //   end: Alignment.bottomLeft,
+              //   colors: [Colors.black, Colors.blueGrey, Colors.black],
+              // )),
               child: Align(
                 alignment: Alignment.topLeft,
                 child: Stack(children: <Widget>[
+                  Container(
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage('assets/images/Bg.jpeg'),
+                            fit: BoxFit.cover)),
+                  ),
                   Divider(
                       height: height * .3,
                       thickness: 5,
@@ -51,28 +57,32 @@ class HomeScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         SizedBox(height: height * .2),
-                        Text(
-                          'DashBoard',
-                          textAlign: TextAlign.justify,
-                          style: GoogleFonts.adventPro(
-                              color: Colors.orange,
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold),
+                        Column(
+                          children: [
+                            Text(
+                              'DashBoard',
+                              textAlign: TextAlign.justify,
+                              style: GoogleFonts.adventPro(
+                                  color: Colors.orange,
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: SizedBox(
+                                  height: height * .3,
+                                  child: MyHomePage(
+                                    title: '',
+                                  )
+
+                                  // const _LineChart(
+                                  //   isShowingMainData: true,
+                                  // ),
+                                  ),
+                            ),
+                          ],
                         ),
 
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: SizedBox(
-                              height: height * .35,
-                              child: MyHomePage(
-                                title: '',
-                              )
-
-                              // const _LineChart(
-                              //   isShowingMainData: true,
-                              // ),
-                              ),
-                        ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Align(
@@ -1020,6 +1030,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return SafeArea(
         child: Scaffold(
             body: SfCartesianChart(
+                plotAreaBackgroundColor: Colors.transparent,
                 backgroundColor: Colors.amber,
                 borderColor: Colors.black,
                 borderWidth: 3,

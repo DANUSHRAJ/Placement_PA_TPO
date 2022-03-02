@@ -63,18 +63,25 @@ class _LoginPageState extends State<LoginPage> {
         body: Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            decoration: const BoxDecoration(
-                gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              colors: [Colors.black, Colors.blueGrey, Colors.black],
-            )),
+
+            // decoration: const BoxDecoration(
+            //     gradient: LinearGradient(
+            //   begin: Alignment.topRight,
+            //   end: Alignment.bottomLeft,
+            //   colors: [Colors.black, Colors.blueGrey, Colors.black],
+            // )),
             //     // image: DecorationImage(
             //     //   image: AssetImage("assets/images/bg.jpg"),
             //     //   fit: BoxFit.cover,
             //     // ),
             //     ),
             child: Stack(children: <Widget>[
+              Container(
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage('assets/images/Bg.jpeg'),
+                        fit: BoxFit.cover)),
+              ),
               SingleChildScrollView(
                 child: Container(
                   padding: EdgeInsets.all(25.0),
