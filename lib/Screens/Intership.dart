@@ -79,7 +79,7 @@ class _IntershipState extends State<Intership> {
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           title: Text(
-            "INTERSHIP",
+            "INTERNSHIP",
             textAlign: TextAlign.justify,
             style: GoogleFonts.adventPro(
                 fontSize: 25,
