@@ -1,0 +1,7 @@
+/node_modules
+**/config/uploads/*.jpg
+**/config/uploads/*.jpeg
+**/config/uploads/*.pdf
+**/config/uploads/*.doc
+**/config/uploads/*.mp3
+**/config/uploads/*.mp4

@@ -1,3 +1,4 @@
+import 'package:admin_sjit_pp/API/forms.api.dart';
 import 'package:flutter/material.dart';
 
 import 'create_form.dart';
@@ -44,16 +45,18 @@ class _FormHomeState extends State<FormHome> {
                               child: const Text('Cancel'),
                           ),
                           TextButton(
-                            onPressed: (){
+                            onPressed: () async {
                               var date=DateTime.now().toString();
                               dynamic formdata={
-                                date:[
+                                "data":[
                                   title,
                                   [
-                                    {'type':'Question','pos':1,'ques':'Enter your Question'}
-                                  ],
-                                ],
+                                    {"type":"Question","pos":1,"ques":"Enter your Question"}
+                                  ]
+                                ]
                               };
+                              FormsApi api = new FormsApi();
+                              print(await api.uploadForm(formdata));
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
