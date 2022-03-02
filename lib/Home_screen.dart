@@ -12,6 +12,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'Forms/forms_homepage.dart';
 import 'Screens/Intership.dart';
 import 'Widgets/webview.dart';
 import 'dart:math' as math;
@@ -624,11 +625,15 @@ class DrawerFb1 extends StatelessWidget {
         ));
         break;
       case 1:
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (BuildContext context) => MyWebView(
-                  title: "GoogleForms",
-                  selectedUrl: "https://www.google.com/forms/about/",
-                )));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const FormHome()));
+        // Navigator.of(context).push(MaterialPageRoute(
+        //     builder: (BuildContext context) => MyWebView(
+        //           title: "GoogleForms",
+        //           selectedUrl: "https://www.google.com/forms/about/",
+        //         )));
         break;
     }
   }
