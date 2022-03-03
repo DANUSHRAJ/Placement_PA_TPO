@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:admin_sjit_pp/API/forms.api.dart';
 import 'package:admin_sjit_pp/Home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'create_form.dart';
@@ -39,18 +43,17 @@ class _FormHomeState extends State<FormHome> {
           Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: Stack(children: <Widget>[
-                Container(
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage('assets/images/Bg.jpeg'),
-                          fit: BoxFit.cover)),
-                ),
-                Center(
+            child: Stack(children: <Widget>[
+              Container(
+                decoration: const BoxDecoration(
+                    image: const DecorationImage(
+                        image: AssetImage('assets/images/Bg.jpeg'),
+                        fit: BoxFit.cover)),
+              ),
+              SingleChildScrollView(
+                child: Center(
                   child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         // GestureDetector(
                         //     onTap: () {
@@ -101,17 +104,32 @@ class _FormHomeState extends State<FormHome> {
                         //                 ],
                         //               ));
                         //     },
+
+                        const SizedBox(height: 50),
+
                         SplashButton(
                             title: "CREATE NEW FORM",
                             onPressed: () {
                               String title = '';
+
                               showDialog(
+                                  barrierColor: Colors.black.withOpacity(0.5),
                                   context: context,
                                   builder: (context) => AlertDialog(
-                                        title: const Text('Create New Form'),
+                                        elevation: 10,
+                                        backgroundColor:
+                                            const Color(0xffffffff),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                        ),
+                                        title: const Text('New Form'),
                                         content: TextField(
                                           decoration: InputDecoration(
-                                            border: OutlineInputBorder(),
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                            ),
                                             labelText: 'Title',
                                           ),
                                           onChanged: (value) => title = value,
@@ -123,6 +141,11 @@ class _FormHomeState extends State<FormHome> {
                                             child: const Text('Cancel'),
                                           ),
                                           TextButton(
+                                            style: TextButton.styleFrom(
+                                              primary: Colors.white,
+                                              backgroundColor: Colors.teal,
+                                              onSurface: Colors.grey,
+                                            ),
                                             onPressed: () {
                                               var date =
                                                   DateTime.now().toString();
@@ -134,17 +157,31 @@ class _FormHomeState extends State<FormHome> {
                                                       'type': 'Question',
                                                       'pos': 1,
                                                       'ques':
-                                                          'What is your age?'
+                                                          'Enter your Question.'
                                                     }
                                                   ],
                                                 ],
                                               };
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          CreateForm(
-                                                              date, formdata)));
+                                              if (title.length > 0) {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            CreateForm(date,
+                                                                formdata)));
+                                              } else {
+                                                showDialog(
+                                                    barrierColor:
+                                                        Colors.black26,
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return const CustomAlertDialog(
+                                                        title:
+                                                            "Please Enter Form Name",
+                                                        description: "",
+                                                      );
+                                                    });
+                                              }
                                             },
                                             child: const Text('Create'),
                                           ),
@@ -152,6 +189,7 @@ class _FormHomeState extends State<FormHome> {
                                       ));
                             },
                             subText: ""),
+                        const SizedBox(height: 50),
                         SplashButton(
                             title: "VIEW FORMS", onPressed: () {}, subText: "")
                       ]),
@@ -179,9 +217,9 @@ class _FormHomeState extends State<FormHome> {
                   //     child: const Text(''),
                   //   ),
                   // ),
-                )
-              ]),
-            ),
+                ),
+              )
+            ]),
           ),
         ]))));
   }
@@ -227,13 +265,13 @@ class SplashButton extends StatelessWidget {
         splashColor: Colors.purpleAccent,
         child: Container(
           width: MediaQuery.of(context).size.width * 0.9,
-          height: 200,
-          padding: const EdgeInsets.all(25.0),
-          decoration: BoxDecoration(
+          height: MediaQuery.of(context).size.height * 0.25,
+          // padding: const EdgeInsets.all(25.0),
+          decoration: const BoxDecoration(
             color: Colors.transparent,
-            borderRadius: BorderRadius.circular(5.0),
+            //borderRadius: BorderRadius.circular(5.0),
             image: DecorationImage(
-                image: AssetImage('assets/images/FcCards.gif'),
+                image: const AssetImage('assets/images/FcCards.gif'),
                 fit: BoxFit.cover),
           ),
           child: Row(
@@ -257,6 +295,74 @@ class SplashButton extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class CustomAlertDialog extends StatefulWidget {
+  const CustomAlertDialog({
+    Key? key,
+    required this.title,
+    required this.description,
+  }) : super(key: key);
+
+  final String title, description;
+
+  @override
+  _CustomAlertDialogState createState() => _CustomAlertDialogState();
+}
+
+class _CustomAlertDialogState extends State<CustomAlertDialog> {
+  Timer? _timer;
+  late double _progress;
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      elevation: 0,
+      backgroundColor: Colors.white.withOpacity(0.9),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(25.0),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const SizedBox(height: 15),
+          Text(
+            "${widget.title}",
+            style: const TextStyle(
+              fontSize: 18.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Divider(
+              thickness: 2,
+              indent: 5,
+              endIndent: 5,
+              color: Colors.orange.withOpacity(.5)),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: 50,
+            child: InkWell(
+              highlightColor: Colors.grey[200],
+              onTap: () {
+                //do somethig
+                Navigator.pop(context);
+              },
+              child: const Center(
+                child: Text(
+                  "Ok",
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    color: Colors.orange,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
