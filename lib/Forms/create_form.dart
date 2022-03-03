@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'display_form.dart';
 
 class CreateForm extends StatefulWidget {
@@ -16,13 +17,13 @@ class CreateForm extends StatefulWidget {
 }
 
 class _CreateFormState extends State<CreateForm> {
-  var box = BoxDecoration(
-    border: Border.all(
-      color: Colors.grey,
-      width: 3,
-    ),
-    borderRadius: BorderRadius.circular(30),
-  );
+  // var box = BoxDecoration(
+  //   border: Border.all(
+  //     color: Colors.grey,
+  //     width: 3,
+  //   ),
+  //   borderRadius: BorderRadius.circular(30),
+  // );
 
   dynamic final_data;
   String date;
@@ -63,7 +64,14 @@ class _CreateFormState extends State<CreateForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(
+          "$title",
+          style: GoogleFonts.adventPro(
+              fontSize: 22, color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: Colors.black,
+        elevation: 20,
+        centerTitle: true,
         actions: [
           IconButton(
             onPressed: () {},
@@ -82,32 +90,39 @@ class _CreateFormState extends State<CreateForm> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          Flexible(
-            child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: _values.length,
-                itemBuilder: (context, index) {
-                  dynamic element = _values[index];
-                  String type = element['type'];
-                  int pos = element['pos'];
-                  if (type == 'checkbox') {
-                    return CTags(pos, index);
-                  }
-                  if (type == 'radio') {
-                    return RTags(pos, index);
-                  }
-                  return QTags(pos, index);
-                  //return Tags(element: element);
-                }),
-          ),
-          const SizedBox(
-            height: 10.0,
-          ),
+      body: Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/images/Bg.jpeg'), fit: BoxFit.cover)),
+        child: Center(
+          child: Column(
+            children: [
+              Flexible(
+                child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: _values.length,
+                    itemBuilder: (context, index) {
+                      dynamic element = _values[index];
+                      String type = element['type'];
+                      int pos = element['pos'];
+                      if (type == 'checkbox') {
+                        return CTags(pos, index);
+                      }
+                      if (type == 'radio') {
+                        return RTags(pos, index);
+                      }
+                      return QTags(pos, index);
+                      //return Tags(element: element);
+                    }),
+              ),
+              const SizedBox(
+                height: 10.0,
+              ),
 
-          //Flexible(child: ListView(children: [Text(_result)]),),
-        ],
+              //Flexible(child: ListView(children: [Text(_result)]),),
+            ],
+          ),
+        ),
       ),
       floatingActionButton: SpeedDial(
         animatedIcon: AnimatedIcons.menu_close,
@@ -143,6 +158,7 @@ class _CreateFormState extends State<CreateForm> {
                 });
               }),
           SpeedDialChild(
+            backgroundColor: Colors.white,
             label: 'Short answer ',
             child: const Icon(Icons.short_text_rounded),
             onTap: () async {
@@ -194,9 +210,16 @@ class _CreateFormState extends State<CreateForm> {
 
   CTags(key, index) {
     return Container(
-      padding: const EdgeInsets.all(5),
-      margin: const EdgeInsets.all(5),
-      decoration: box,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15.0),
+        image: const DecorationImage(
+            image: AssetImage('assets/images/toggle_bg1.png'),
+            fit: BoxFit.fill),
+        color: Colors.white,
+      ),
+      padding: const EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
+      //decoration: box,
       child: Column(
         children: [
           Row(
@@ -260,9 +283,13 @@ class _CreateFormState extends State<CreateForm> {
   //Radio
   RTags(key, index) {
     return Container(
-      padding: const EdgeInsets.all(5),
-      margin: const EdgeInsets.all(5),
-      decoration: box,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15.0),
+        color: Colors.white,
+      ),
+      padding: const EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
+      //decoration: box,
       child: Column(
         children: [
           Row(
@@ -326,9 +353,13 @@ class _CreateFormState extends State<CreateForm> {
   //Text
   QTags(key, index) {
     return Container(
-      padding: const EdgeInsets.all(5),
-      margin: const EdgeInsets.all(5),
-      decoration: box,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15.0),
+        color: Colors.white,
+      ),
+      padding: const EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
+      // decoration: box,
       child: Row(
         children: [
           Text('Question $key'),
@@ -370,7 +401,14 @@ class _CreateFormState extends State<CreateForm> {
 
   _choices(pos, index) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(20, 3, 0, 3),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15.0),
+        color: Colors.white,
+      ),
+      padding: const EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
+      // decoration: box,
+      //margin: const EdgeInsets.fromLTRB(20, 3, 0, 3),
       child: Row(
         children: [
           const Icon(Icons.circle_outlined),
@@ -393,7 +431,14 @@ class _CreateFormState extends State<CreateForm> {
 
   _options(pos, index) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(20, 3, 0, 3),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15.0),
+        color: Colors.white,
+      ),
+      padding: const EdgeInsets.all(3),
+      margin: const EdgeInsets.all(10),
+      // decoration: box,
+      // margin: const EdgeInsets.fromLTRB(20, 3, 0, 3),
       child: Row(
         children: [
           const Icon(Icons.check_box_outlined),
