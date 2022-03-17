@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:admin_sjit_pp/API/forms.api.dart';
 import 'package:admin_sjit_pp/Home_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+//import 'package:flutter_easyloading/flutter_easyloading.dart';
+//import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'create_form.dart';
@@ -148,16 +148,16 @@ class _FormHomeState extends State<FormHome> {
                                             ),
                                             onPressed: () async {
                               var date=DateTime.now().toString();
-                              dynamic formdata={
+                              dynamic formdata=[{
                                 "data":[
                                   title,
                                   [
                                     {"type":"Question","pos":1,"ques":"Enter your Question"}
                                   ]
                                 ]
-                              };
+                              }];
                               FormsApi api = new FormsApi();
-                              print(await api.uploadForm(formdata));
+                              print(await api.uploadForm(formdata[0]));
                                                 Navigator.push(
                                                     context,
                                                     MaterialPageRoute(

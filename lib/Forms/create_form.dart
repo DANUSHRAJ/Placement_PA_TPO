@@ -37,8 +37,10 @@ class _CreateFormState extends State<CreateForm> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    title = final_data[date][0];
-    _values = final_data[date][1];
+    title = final_data[0]["data"][0];
+    _values = final_data[0]["data"][1];
+    print(_values);
+    print(title);
     if (_values.isEmpty) {
       _values.add(
           {'type': 'Question', 'pos': 1, 'ques': ' Enter your text here..'});

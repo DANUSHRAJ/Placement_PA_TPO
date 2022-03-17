@@ -25,7 +25,7 @@ class _DisplayFormState extends State<DisplayForm> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    maindata=finaldata[date][1];
+    maindata=finaldata[0]["data"][1];
     _answer=maindata;
   }
 
