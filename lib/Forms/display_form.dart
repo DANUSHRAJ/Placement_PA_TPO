@@ -1,32 +1,34 @@
 import 'dart:convert';
 
+import 'package:admin_sjit_pp/API/forms.api.dart';
 import 'package:flutter/material.dart';
 
 class DisplayForm extends StatefulWidget {
   final dynamic finaldata;
   final String date;
-  const DisplayForm(this.finaldata,this.date, {Key? key}) : super(key: key);
+  const DisplayForm(this.finaldata, this.date, {Key? key}) : super(key: key);
 
   @override
-  _DisplayFormState createState() => _DisplayFormState(finaldata: finaldata,date: date);
+  _DisplayFormState createState() =>
+      _DisplayFormState(finaldata: finaldata, date: date);
 }
 
 class _DisplayFormState extends State<DisplayForm> {
   //input data
   String date;
   dynamic finaldata;
-  List maindata=[];
+  List maindata = [];
   //data form user
-  List _answer=[];
-  String _result='';
-  _DisplayFormState({required this.finaldata,required this.date});
+  List _answer = [];
+  String _result = '';
+  _DisplayFormState({required this.finaldata, required this.date});
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    maindata=finaldata[0]["data"][1];
-    _answer=maindata;
+    maindata = finaldata[0]["data"][1];
+    _answer = maindata;
   }
 
   @override
@@ -36,7 +38,12 @@ class _DisplayFormState extends State<DisplayForm> {
         centerTitle: true,
         title: const Text('USER DEFINED FORM'),
         actions: [
-          IconButton(onPressed: (){}, icon: const Icon(Icons.done_outlined))
+          IconButton(
+              onPressed: () async {
+                FormsApi api = new FormsApi();
+                await api.uploadForm(finaldata[0]);
+              },
+              icon: const Icon(Icons.done_outlined))
         ],
       ),
       body: Container(
@@ -47,39 +54,41 @@ class _DisplayFormState extends State<DisplayForm> {
               Flexible(
                 child: ListView.separated(
                     shrinkWrap: true,
-                    separatorBuilder:  (context,index) => const SizedBox(height: 5.0,),
+                    separatorBuilder: (context, index) => const SizedBox(
+                          height: 5.0,
+                        ),
                     itemCount: maindata.length,
-                    itemBuilder: (context,index){
+                    itemBuilder: (context, index) {
                       dynamic element = maindata[index];
                       String type = element['type'];
-                      int pos= element['pos'];
-                      if(type=='checkbox'){
+                      int pos = element['pos'];
+                      if (type == 'checkbox') {
                         return CATag(pos, index);
                       }
-                      if(type=='radio'){
+                      if (type == 'radio') {
                         return RATag(pos, index);
                       }
-                      return QATags(pos,index);
-                    }
-                ),
+                      return QATags(pos, index);
+                    }),
               ),
-              const SizedBox(width: 3,),
+              const SizedBox(
+                width: 3,
+              ),
               //Flexible(child: ListView(children: [Text(_result),]),),
             ],
-          )
-      ),
+          )),
     );
   }
 
   //Checkbox Tag
 
-  CATag(pos,index){
+  CATag(pos, index) {
     var value = maindata[index]['ques'];
     var ans = _answer[index]['answer'];
-    List d =maindata[index]['options'];
-    if(ans==null){
-      _answer[index]['answer']=[];
-      for(int i=0;i<d.length;i++){
+    List d = maindata[index]['options'];
+    if (ans == null) {
+      _answer[index]['answer'] = [];
+      for (int i = 0; i < d.length; i++) {
         _answer[index]['answer'].add(false);
       }
     }
@@ -88,7 +97,9 @@ class _DisplayFormState extends State<DisplayForm> {
         Wrap(
           children: [
             Text('Question No. $pos'),
-            const SizedBox( width: 10.0,),
+            const SizedBox(
+              width: 10.0,
+            ),
             Text(
               value,
               style: const TextStyle(
@@ -103,18 +114,19 @@ class _DisplayFormState extends State<DisplayForm> {
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemCount: d.length,
-            separatorBuilder: (context,ind) => const SizedBox(height: 5.0,),
-            itemBuilder: (context,ind){
+            separatorBuilder: (context, ind) => const SizedBox(
+              height: 5.0,
+            ),
+            itemBuilder: (context, ind) {
               return CheckboxListTile(
                   title: Text(d[ind]),
                   value: _answer[index]['answer'][ind],
                   controlAffinity: ListTileControlAffinity.leading,
-                  onChanged: (val){
+                  onChanged: (val) {
                     setState(() {
-                      _answer[index]['answer'][ind]=val;
+                      _answer[index]['answer'][ind] = val;
                     });
-                  }
-              );
+                  });
             },
           ),
         )
@@ -124,15 +136,17 @@ class _DisplayFormState extends State<DisplayForm> {
 
   //radio Tag
 
-  RATag(pos,index){
+  RATag(pos, index) {
     var value = maindata[index]['ques'];
-    List d =maindata[index]['choices'];
+    List d = maindata[index]['choices'];
     return Column(
       children: [
         Wrap(
           children: [
             Text('Question No. $pos'),
-            const SizedBox( width: 10.0,),
+            const SizedBox(
+              width: 10.0,
+            ),
             Text(
               value,
               style: const TextStyle(
@@ -147,18 +161,19 @@ class _DisplayFormState extends State<DisplayForm> {
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemCount: d.length,
-            separatorBuilder: (context,ind) => const SizedBox(height: 5.0,),
-            itemBuilder: (context,ind){
+            separatorBuilder: (context, ind) => const SizedBox(
+              height: 5.0,
+            ),
+            itemBuilder: (context, ind) {
               return RadioListTile<String>(
                   title: Text(d[ind]),
                   value: d[ind],
                   groupValue: _answer[index]['answer'],
-                  onChanged: (val){
+                  onChanged: (val) {
                     setState(() {
-                      _answer[index]['answer']=d[ind];
+                      _answer[index]['answer'] = d[ind];
                     });
-                  }
-              );
+                  });
             },
           ),
         )
@@ -166,18 +181,19 @@ class _DisplayFormState extends State<DisplayForm> {
     );
   }
 
-
   //Question Tag
 
-  QATags(pos,index){
-    var value =maindata[index]['ques'];
+  QATags(pos, index) {
+    var value = maindata[index]['ques'];
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Wrap(
           children: [
             Text('Question No. $pos'),
-            const SizedBox(width: 10.0,),
+            const SizedBox(
+              width: 10.0,
+            ),
             Text(
               value,
               style: const TextStyle(
@@ -189,16 +205,16 @@ class _DisplayFormState extends State<DisplayForm> {
         ),
         TextFormField(
           onChanged: (val) {
-            _onUpdate(index,val);
+            _onUpdate(index, val);
           },
         )
       ],
     );
   }
 
-  _onUpdate(int index,String val){
+  _onUpdate(int index, String val) {
     setState(() {
-      _answer[index]['ans']=val;
+      _answer[index]['ans'] = val;
       _result = _prettyPrint(_answer);
     });
   }
@@ -207,5 +223,4 @@ class _DisplayFormState extends State<DisplayForm> {
     var encoder = const JsonEncoder.withIndent('    ');
     return encoder.convert(jsonObject);
   }
-
 }
