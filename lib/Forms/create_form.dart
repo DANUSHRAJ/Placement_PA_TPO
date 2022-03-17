@@ -81,7 +81,7 @@ class _CreateFormState extends State<CreateForm> {
           ),
           IconButton(
             onPressed: () {
-              final_data[date][1] = _values;
+              final_data[0]["data"][1] = _values;
               //print(final_data);
               Navigator.push(
                   context,
