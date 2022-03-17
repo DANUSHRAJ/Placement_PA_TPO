@@ -146,42 +146,24 @@ class _FormHomeState extends State<FormHome> {
                                               backgroundColor: Colors.teal,
                                               onSurface: Colors.grey,
                                             ),
-                                            onPressed: () {
-                                              var date =
-                                                  DateTime.now().toString();
-                                              dynamic formdata = {
-                                                date: [
-                                                  title,
-                                                  [
-                                                    {
-                                                      'type': 'Question',
-                                                      'pos': 1,
-                                                      'ques':
-                                                          'Enter your Question.'
-                                                    }
-                                                  ],
-                                                ],
-                                              };
-                                              if (title.length > 0) {
+                                            onPressed: () async {
+                              var date=DateTime.now().toString();
+                              dynamic formdata={
+                                "data":[
+                                  title,
+                                  [
+                                    {"type":"Question","pos":1,"ques":"Enter your Question"}
+                                  ]
+                                ]
+                              };
+                              FormsApi api = new FormsApi();
+                              print(await api.uploadForm(formdata));
                                                 Navigator.push(
                                                     context,
                                                     MaterialPageRoute(
                                                         builder: (context) =>
                                                             CreateForm(date,
                                                                 formdata)));
-                                              } else {
-                                                showDialog(
-                                                    barrierColor:
-                                                        Colors.black26,
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return const CustomAlertDialog(
-                                                        title:
-                                                            "Please Enter Form Name",
-                                                        description: "",
-                                                      );
-                                                    });
-                                              }
                                             },
                                             child: const Text('Create'),
                                           ),
