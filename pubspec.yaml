@@ -60,6 +60,8 @@ dependencies:
   dio: ^4.0.4
   flutter_easyloading: ^3.0.3
   fluttertoast: ^8.0.9
+  onesignal_flutter: ^3.2.8
+  http: ^0.13.4
  
   
 
