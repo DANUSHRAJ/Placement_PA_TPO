@@ -147,23 +147,32 @@ class _FormHomeState extends State<FormHome> {
                                               onSurface: Colors.grey,
                                             ),
                                             onPressed: () async {
-                              var date=DateTime.now().toString();
-                              dynamic formdata=[{
-                                "data":[
-                                  title,
-                                  [
-                                    {"type":"Question","pos":1,"ques":"Enter your Question"}
-                                  ]
-                                ]
-                              }];
-                              FormsApi api = new FormsApi();
-                              print(await api.uploadForm(formdata[0]));
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            CreateForm(date,
-                                                                formdata)));
+                                              var date =
+                                                  DateTime.now().toString();
+                                              dynamic formdata = [
+                                                {
+                                                  "data": [
+                                                    title,
+                                                    [
+                                                      {
+                                                        "type": "Question",
+                                                        "pos": 1,
+                                                        "ques":
+                                                            "Enter your Question"
+                                                      }
+                                                    ]
+                                                  ]
+                                                }
+                                              ];
+                                              FormsApi api = new FormsApi();
+                                              print(await api
+                                                  .uploadForm(formdata[0]));
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          CreateForm(
+                                                              date, formdata)));
                                             },
                                             child: const Text('Create'),
                                           ),
@@ -241,7 +250,7 @@ class SplashButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+      //shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
       child: InkWell(
         onTap: onPressed,
         splashColor: Colors.purpleAccent,
@@ -249,9 +258,10 @@ class SplashButton extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 0.9,
           height: MediaQuery.of(context).size.height * 0.25,
           // padding: const EdgeInsets.all(25.0),
+
           decoration: const BoxDecoration(
             color: Colors.transparent,
-            //borderRadius: BorderRadius.circular(5.0),
+            backgroundBlendMode: BlendMode.softLight,
             image: DecorationImage(
                 image: const AssetImage('assets/images/FcCards.gif'),
                 fit: BoxFit.cover),
@@ -263,7 +273,7 @@ class SplashButton extends StatelessWidget {
               Text(
                 title,
                 style: GoogleFonts.adventPro(
-                    fontSize: 25,
+                    fontSize: 28,
                     color: Colors.white,
                     fontWeight: FontWeight.bold),
               ),
