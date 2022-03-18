@@ -1,3 +1,4 @@
+import 'package:admin_sjit_pp/API/forms.api.dart';
 import 'package:flutter/material.dart';
 
 class FormList extends StatefulWidget {
@@ -8,6 +9,26 @@ class FormList extends StatefulWidget {
 }
 
 class _FormListState extends State<FormList> {
+
+  FormsApi api = new FormsApi();
+
+  dynamic FormDataFinal;
+
+  void getAllFormData() async {
+    FormDataFinal = await api.downloadForm();
+    // print("Success");
+    // print(FormDataFinal.runtimeType);
+    // print(FormDataFinal);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    super.initState();
+    getAllFormData();
+    // EasyLoading.removeCallbacks();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
