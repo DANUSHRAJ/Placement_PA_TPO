@@ -182,7 +182,13 @@ class _FormHomeState extends State<FormHome> {
                             subText: ""),
                         const SizedBox(height: 50),
                         SplashButton(
-                            title: "VIEW FORMS", onPressed: () {}, subText: "")
+                            title: "VIEW FORMS", onPressed: () {
+                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          FormList()));
+                            }, subText: "")
                       ]),
 
                   // GestureDetector(

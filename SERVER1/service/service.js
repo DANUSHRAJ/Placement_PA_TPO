@@ -19,6 +19,19 @@ module.exports.uploadForm = async (req,res)=>{
     }
 };
 
+module.exports.downloadForm = async (req,res)=>{
+    try{
+        const result = await client.db("Cluster0").collection("forms").find();
+        var resultfinal = [];
+        await result.forEach(element => {
+            resultfinal.push(element);
+        });
+        res.send(resultfinal);
+    } catch(err){
+        console.log(err);
+    }
+};
+
 module.exports.dwnDataJSON = async (req,res)=>{
     try{
         await client.db("Cluster0").collection("profile").find({"BATCH":req.body.batch}).toArray((err, result)=>{

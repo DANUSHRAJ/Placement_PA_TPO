@@ -10,6 +10,9 @@ server_router.post("/",(req,res)=>{
 //http://localhost:8080/uploadForm
 server_router.post("/uploadForm",service.uploadForm);
 
+//http://localhost:8080/downloadForm
+server_router.post("/downloadForm",service.downloadForm);
+
 //http://localhost:8080/dwnDataJSON
 server_router.get("/dwnDataJSON",service.dwnDataJSON);
 
