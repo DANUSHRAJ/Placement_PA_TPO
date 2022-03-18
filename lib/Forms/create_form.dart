@@ -7,13 +7,12 @@ import 'display_form.dart';
 
 class CreateForm extends StatefulWidget {
   final dynamic final_data;
-  final String date;
 
-  const CreateForm(this.date, this.final_data, {Key? key}) : super(key: key);
+  const CreateForm(this.final_data, {Key? key}) : super(key: key);
 
   @override
   _CreateFormState createState() =>
-      _CreateFormState(final_data: final_data, date: date);
+      _CreateFormState(final_data: final_data);
 }
 
 class _CreateFormState extends State<CreateForm> {
@@ -26,12 +25,12 @@ class _CreateFormState extends State<CreateForm> {
   // );
 
   dynamic final_data;
-  String date;
   String title = '';
+  String date='';
   String _result = '';
   List<dynamic> _values = [];
 
-  _CreateFormState({required this.final_data, required this.date});
+  _CreateFormState({required this.final_data});
 
   @override
   void initState() {
@@ -39,6 +38,7 @@ class _CreateFormState extends State<CreateForm> {
     super.initState();
     title = final_data[0]["data"][0];
     _values = final_data[0]["data"][1];
+    date = final_data[0]['data'][2];
     print(_values);
     print(title);
     if (_values.isEmpty) {

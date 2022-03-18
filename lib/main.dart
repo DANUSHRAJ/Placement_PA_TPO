@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:simple_animations/simple_animations.dart';
+import 'Forms/forms_homepage.dart';
 import 'Login_page.dart';
 
 Future<void> main() async {
@@ -20,7 +21,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MyHomePage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context)=> MyHomePage(),
+        "/formHome":(context) => const FormHome(),
+      },
+      //home: MyHomePage(),
       debugShowCheckedModeBanner: false,
     );
   }

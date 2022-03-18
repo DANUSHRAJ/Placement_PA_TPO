@@ -106,7 +106,6 @@ class _FormHomeState extends State<FormHome> {
                         //     },
 
                         const SizedBox(height: 50),
-
                         SplashButton(
                             title: "CREATE NEW FORM",
                             onPressed: () {
@@ -160,7 +159,8 @@ class _FormHomeState extends State<FormHome> {
                                                         "ques":
                                                             "Enter your Question"
                                                       }
-                                                    ]
+                                                    ],
+                                                    date,
                                                   ]
                                                 }
                                               ];
@@ -171,8 +171,7 @@ class _FormHomeState extends State<FormHome> {
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                          CreateForm(
-                                                              date, formdata)));
+                                                          CreateForm(formdata)));
                                             },
                                             child: const Text('Create'),
                                           ),

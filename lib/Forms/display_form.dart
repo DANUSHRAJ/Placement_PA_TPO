@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:admin_sjit_pp/API/forms.api.dart';
 import 'package:flutter/material.dart';
 
+import 'forms_homepage.dart';
+
 class DisplayForm extends StatefulWidget {
   final dynamic finaldata;
   final String date;
@@ -40,8 +42,27 @@ class _DisplayFormState extends State<DisplayForm> {
         actions: [
           IconButton(
               onPressed: () async {
-                FormsApi api = new FormsApi();
+                FormsApi api = FormsApi();
                 await api.uploadForm(finaldata[0]);
+                showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      elevation: 15,
+                      backgroundColor: const Color(0xffffffff),
+                      shape: RoundedRectangleBorder(
+                        borderRadius:
+                        BorderRadius.circular(20.0),
+                      ),
+                      title: const Text('Form Created Successfully'),
+                      actions: [
+                        TextButton(
+                            //onPressed: (){},
+                            //onPressed: ()=> Navigator.popUntil(context, ModalRoute.withName('/formHome')),
+                            onPressed: ()=> Navigator.popAndPushNamed(context, '/formHome'),
+                            child: const Text('Ok')),
+                      ],
+                    )
+                );
               },
               icon: const Icon(Icons.done_outlined))
         ],
