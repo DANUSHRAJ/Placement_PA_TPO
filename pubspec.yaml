@@ -62,6 +62,8 @@ dependencies:
   fluttertoast: ^8.0.9
   onesignal_flutter: ^3.2.8
   http: ^0.13.4
+  flutter_advanced_switch: ^3.0.0+1
+  #xlive_switch: ^1.0.5
  
   
 
