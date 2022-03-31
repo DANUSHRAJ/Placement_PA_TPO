@@ -15,4 +15,11 @@ class ToggleApi {
         .post('/updateToggleStatus', data: {"colls": colls, "value": value});
     return "Success";
   }
+  
+  Future<String> getCurrentToogleStatus(String colls) async {
+    final response = await _dio.post('/getCurrentProfileStatus', data: {
+      "colls":colls
+    });
+    return response.toString();
+  }
 }

@@ -16,6 +16,9 @@ server_router.post("/downloadForm",service.downloadForm);
 //http://localhost:8080/updateToggleStatus
 server_router.post("/updateToggleStatus",service.updateToggleStatus);
 
+//http://localhost:8080/getCurrentToggleStatus
+server_router.post("/getCurrentToggleStatus",service.getCurrentToggleStatus);
+
 //http://localhost:8080/dwnDataJSON
 server_router.get("/dwnDataJSON",service.dwnDataJSON);
 
