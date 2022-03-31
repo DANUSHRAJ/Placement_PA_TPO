@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:admin_sjit_pp/API/toggle.api.dart';
 import 'package:admin_sjit_pp/Home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -64,12 +65,18 @@ class _SubmitBttnState extends State<SubmitBttn> {
         await sendNotification([],"Alert!","Admin Login Successfull!");
   }
 
+  Future<void> changeToggle() async {
+    ToggleApi api = ToggleApi();
+    await api.ToogleStatus("workshop", 0);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.centerRight,
       child: InkWell(
         onTap: () async {
+          await changeToggle();
           await generateNotification();
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => HomeScreen()));
