@@ -10,16 +10,15 @@ class ToggleApi {
 
   final _dio = Dio(BaseOptions(baseUrl: apiUrl));
 
-  Future<String> ToogleStatus(String colls, int value) async {
+  Future<String> toggleStatus(String colls, int value) async {
     final response = await _dio
         .post('/updateToggleStatus', data: {"colls": colls, "value": value});
     return "Success";
   }
-  
+
   Future<String> getCurrentToogleStatus(String colls) async {
-    final response = await _dio.post('/getCurrentProfileStatus', data: {
-      "colls":colls
-    });
+    final response =
+        await _dio.post('/getCurrentToggleStatus', data: {"colls": colls});
     return response.toString();
   }
 }

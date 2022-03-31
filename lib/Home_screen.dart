@@ -105,22 +105,18 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             CardFb1(
                                 text: "PROFILE",
+                                cardname: "profile",
                                 imageUrl:
                                     "https://assets7.lottiefiles.com/private_files/lf30_LOw4AL.json",
                                 subtitle: "__ __",
-                                onPressed: () async {
-                                  ToggleApi api = ToggleApi();
-                                  await api.ToogleStatus("profile", 0);
-                                }),
+                                onPressed: () {}),
                             CardFb1(
                                 text: "INTERNSHIPS",
+                                cardname: "interns",
                                 imageUrl:
                                     "https://assets3.lottiefiles.com/packages/lf20_m0ze3ipv.json",
                                 subtitle: "__ ___",
-                                onPressed: () async {
-                                  ToggleApi api = ToggleApi();
-                                  await api.ToogleStatus("interns", 0);
-                                }),
+                                onPressed: () {}),
                           ],
                         ),
 
@@ -132,22 +128,18 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             CardFb1(
                                 text: "WORKSHOPS",
+                                cardname: "workshop",
                                 imageUrl:
                                     "https://assets7.lottiefiles.com/private_files/lf30_LOw4AL.json",
                                 subtitle: "__ __",
-                                onPressed: () async {
-                                  ToggleApi api = ToggleApi();
-                                  await api.ToogleStatus("workshop", 0);
-                                }),
+                                onPressed: () {}),
                             CardFb1(
                                 text: "COURSES",
+                                cardname: "course",
                                 imageUrl:
                                     "https://assets7.lottiefiles.com/private_files/lf30_LOw4AL.json",
                                 subtitle: "__ __",
-                                onPressed: () async {
-                                  ToggleApi api = ToggleApi();
-                                  await api.ToogleStatus("course", 0);
-                                }),
+                                onPressed: () {}),
                           ],
                         ),
                         SizedBox(
@@ -158,13 +150,11 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             CardFb1(
                                 text: "PLACEMENTS",
+                                cardname: "placements",
                                 imageUrl:
                                     "https://assets7.lottiefiles.com/private_files/lf30_LOw4AL.json",
                                 subtitle: "__ __",
-                                onPressed: () async {
-                                  ToggleApi api = ToggleApi();
-                                  await api.ToogleStatus("placements", 0);
-                                }),
+                                onPressed: () {}),
                           ],
                         ),
                         SizedBox(
@@ -543,9 +533,11 @@ class CardFb1 extends StatelessWidget {
   final String imageUrl;
   final String subtitle;
   final Function() onPressed;
+  final String cardname;
 
   const CardFb1(
       {required this.text,
+      required this.cardname,
       required this.imageUrl,
       required this.subtitle,
       required this.onPressed,
@@ -595,7 +587,8 @@ class CardFb1 extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.black, fontSize: 18),
             ),
-            ToggleSwitch(),
+            //ToggleSwitch(cardname: cardname),
+            Toggle(cardname: cardname),
           ],
         ),
       ),
@@ -781,58 +774,133 @@ class _ZoomDrawerTestState extends State<ZoomDrawerTest> {
 
 //toggle switch
 
-class ToggleSwitch extends StatefulWidget {
-  const ToggleSwitch({Key? key}) : super(key: key);
+// class ToggleSwitch extends StatefulWidget {
+//   final String cardname;
 
+//   ToggleSwitch({Key? key, required this.cardname}) : super(key: key);
+
+//   @override
+//   State<ToggleSwitch> createState() => _ToggleSwitchState();
+// }
+
+// class _ToggleSwitchState extends State<ToggleSwitch> {
+//   var _controller00;
+//   bool _enabled = false;
+
+//   Future<void> __updatestatus(String cardname, int value) async {
+//     ToggleApi api = ToggleApi();
+//     await api.toggleStatus(cardname, value);
+//     print("sucess");
+//   }
+
+//   Future<void> _getstatus(String cardname) async {
+//     ToggleApi api = ToggleApi();
+//     int result1 = (await api.getCurrentToogleStatus(cardname)) as int;
+//     _enabled = result1 == 1 ? true : false;
+//     if (_enabled)
+//       _controller00 = ValueNotifier<bool>(true);
+//     else
+//       _controller00 = ValueNotifier<bool>(false);
+//     print("get success");
+//   }
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     _getstatus(widget.cardname);
+//     // _controller00.initState(() {});
+
+//     _controller00.addListener(() {
+//       setState(() {
+//         if (_controller00.value) {
+//           _enabled = true;
+//           __updatestatus(widget.cardname, 1);
+//         } else {
+//           _enabled = false;
+//           __updatestatus(widget.cardname, 0);
+//         }
+//       });
+//     });
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     print("sucess");
+//     return Container(
+//         //width: double.infinity,
+//         child: SingleChildScrollView(
+//             physics: ClampingScrollPhysics(),
+//             child: Column(
+//                 crossAxisAlignment: CrossAxisAlignment.center,
+//                 mainAxisAlignment: MainAxisAlignment.center,
+//                 children: [
+//                   Row(
+//                     mainAxisSize: MainAxisSize.max,
+//                     mainAxisAlignment: MainAxisAlignment.spaceAround,
+//                     children: [
+//                       Padding(
+//                         padding: const EdgeInsets.all(8.0),
+//                         child: AdvancedSwitch(
+//                           activeChild: Text('ON'),
+//                           inactiveChild: Text('OFF'),
+//                           borderRadius: BorderRadius.circular(15),
+//                           width: 60,
+//                           controller: _controller00,
+//                         ),
+//                       ),
+//                     ],
+//                   ),
+//                 ])));
+//   }
+// }
+
+class Toggle extends StatefulWidget {
+  final String cardname;
+
+  Toggle({Key? key, required this.cardname}) : super(key: key);
   @override
-  State<ToggleSwitch> createState() => _ToggleSwitchState();
+  _ToggleState createState() => _ToggleState();
 }
 
-class _ToggleSwitchState extends State<ToggleSwitch> {
-  final _controller00 = ValueNotifier<bool>(false);
-  bool _enabled = false;
+class _ToggleState extends State<Toggle> {
+  bool isSwitched = false;
+
+  Future<void> __updatestatus(String cardname, int value) async {
+    ToggleApi api = ToggleApi();
+    await api.toggleStatus(cardname, value);
+    print("sucess");
+  }
+
+  Future<void> _getstatus(String cardname) async {
+    ToggleApi api = ToggleApi();
+    int result1 = (await api.getCurrentToogleStatus(cardname)) as int;
+    print("Result1: " + result1.toString());
+    isSwitched = result1 == 1 ? true : false;
+    print("get success");
+  }
 
   @override
   void initState() {
     super.initState();
-
-    _controller00.addListener(() {
-      setState(() {
-        if (_controller00.value) {
-          _enabled = true;
-        } else {
-          _enabled = false;
-        }
-      });
-    });
+    _getstatus(widget.cardname);
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        //width: double.infinity,
-        child: SingleChildScrollView(
-            physics: ClampingScrollPhysics(),
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: AdvancedSwitch(
-                          activeChild: Text('ON'),
-                          inactiveChild: Text('OFF'),
-                          borderRadius: BorderRadius.circular(15),
-                          width: 60,
-                          controller: _controller00,
-                        ),
-                      ),
-                    ],
-                  ),
-                ])));
+      child: Center(
+        child: Switch(
+          value: isSwitched,
+          onChanged: (value) {
+            setState(() {
+              isSwitched = value;
+              print(isSwitched);
+            });
+          },
+          activeTrackColor: Colors.lightGreenAccent,
+          activeColor: Colors.green,
+        ),
+      ),
+    );
   }
 }

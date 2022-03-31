@@ -61,10 +61,10 @@ class _SubmitBttnState extends State<SubmitBttn> {
     await sendNotification([], "Alert!", "Admin Login Successfull!");
   }
 
-  Future<void> changeToggle() async {
-    ToggleApi api = ToggleApi();
-    await api.ToogleStatus("workshop", 0);
-  }
+  // Future<void> changeToggle() async {
+  //   ToggleApi api = ToggleApi();
+  //   await api.ToogleStatus("workshop", 0);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -72,8 +72,8 @@ class _SubmitBttnState extends State<SubmitBttn> {
       alignment: Alignment.centerRight,
       child: InkWell(
         onTap: () async {
-          await changeToggle();
-          await generateNotification();
+          // await changeToggle();
+          // await generateNotification();
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => HomeScreen()));
         },
