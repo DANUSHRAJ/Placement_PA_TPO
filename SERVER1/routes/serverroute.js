@@ -13,6 +13,9 @@ server_router.post("/uploadForm",service.uploadForm);
 //http://localhost:8080/downloadForm
 server_router.post("/downloadForm",service.downloadForm);
 
+//http://localhost:8080/updateToggleStatus
+server_router.post("/updateToggleStatus",service.updateToggleStatus);
+
 //http://localhost:8080/dwnDataJSON
 server_router.get("/dwnDataJSON",service.dwnDataJSON);
 

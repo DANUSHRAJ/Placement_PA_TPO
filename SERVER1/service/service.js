@@ -32,6 +32,30 @@ module.exports.downloadForm = async (req,res)=>{
     }
 };
 
+module.exports.updateToggleStatus = async (req,res)=>{
+    try{
+        var colls=req.body.colls;
+        var value=req.body.value;
+        const result = await client.db("Cluster0").collection(colls).find({"status":{ "$in": [0, 1] }});
+        var resultfinal = [];
+        await result.forEach(element => {
+            resultfinal.push(element);
+        });
+        var statusval = resultfinal[0].status;
+        await client.db("Cluster0").collection(colls).updateMany(
+            {status: statusval},
+            {$set: {status: value}},
+            (err1,result1)=>{
+                if(err1)
+                    console.log(err1);
+            }
+        );
+        res.send("Updated Value!");
+    } catch(err){
+        console.log(err);
+    }
+};
+
 module.exports.dwnDataJSON = async (req,res)=>{
     try{
         await client.db("Cluster0").collection("profile").find({"BATCH":req.body.batch}).toArray((err, result)=>{
