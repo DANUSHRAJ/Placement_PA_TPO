@@ -12,6 +12,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'API/toggle.api.dart';
 import 'Forms/forms_homepage.dart';
 import 'Screens/Intership.dart';
 import 'Widgets/webview.dart';
@@ -107,13 +108,19 @@ class HomeScreen extends StatelessWidget {
                                 imageUrl:
                                     "https://assets7.lottiefiles.com/private_files/lf30_LOw4AL.json",
                                 subtitle: "__ __",
-                                onPressed: () {}),
+                                onPressed: () async {
+                                  ToggleApi api = ToggleApi();
+                                  await api.ToogleStatus("profile", 0);
+                                }),
                             CardFb1(
                                 text: "INTERNSHIPS",
                                 imageUrl:
                                     "https://assets3.lottiefiles.com/packages/lf20_m0ze3ipv.json",
                                 subtitle: "__ ___",
-                                onPressed: () {}),
+                                onPressed: () async {
+                                  ToggleApi api = ToggleApi();
+                                  await api.ToogleStatus("interns", 0);
+                                }),
                           ],
                         ),
 
@@ -128,13 +135,19 @@ class HomeScreen extends StatelessWidget {
                                 imageUrl:
                                     "https://assets7.lottiefiles.com/private_files/lf30_LOw4AL.json",
                                 subtitle: "__ __",
-                                onPressed: () {}),
+                                onPressed: () async {
+                                  ToggleApi api = ToggleApi();
+                                  await api.ToogleStatus("workshop", 0);
+                                }),
                             CardFb1(
                                 text: "COURSES",
                                 imageUrl:
                                     "https://assets7.lottiefiles.com/private_files/lf30_LOw4AL.json",
                                 subtitle: "__ __",
-                                onPressed: () {}),
+                                onPressed: () async {
+                                  ToggleApi api = ToggleApi();
+                                  await api.ToogleStatus("course", 0);
+                                }),
                           ],
                         ),
                         SizedBox(
@@ -148,7 +161,10 @@ class HomeScreen extends StatelessWidget {
                                 imageUrl:
                                     "https://assets7.lottiefiles.com/private_files/lf30_LOw4AL.json",
                                 subtitle: "__ __",
-                                onPressed: () {})
+                                onPressed: () async {
+                                  ToggleApi api = ToggleApi();
+                                  await api.ToogleStatus("placements", 0);
+                                }),
                           ],
                         ),
                         SizedBox(
@@ -775,6 +791,21 @@ class ToggleSwitch extends StatefulWidget {
 class _ToggleSwitchState extends State<ToggleSwitch> {
   final _controller00 = ValueNotifier<bool>(false);
   bool _enabled = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller00.addListener(() {
+      setState(() {
+        if (_controller00.value) {
+          _enabled = true;
+        } else {
+          _enabled = false;
+        }
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
