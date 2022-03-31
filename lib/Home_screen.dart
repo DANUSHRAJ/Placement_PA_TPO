@@ -873,10 +873,11 @@ class _ToggleState extends State<Toggle> {
 
   Future<void> _getstatus(String cardname) async {
     ToggleApi api = ToggleApi();
-    int result1 = (await api.getCurrentToogleStatus(cardname)) as int;
-    print("Result1: " + result1.toString());
-    isSwitched = result1 == 1 ? true : false;
-    print("get success");
+    var result1 = await api.getCurrentToogleStatus(cardname);
+    // print("Result1: " + result1);
+    isSwitched = result1 == "1" ? true : false;
+    build(context);
+    // print("get success");
   }
 
   @override
@@ -885,7 +886,7 @@ class _ToggleState extends State<Toggle> {
     _getstatus(widget.cardname);
   }
 
-  @override
+  // @override
   Widget build(BuildContext context) {
     return Container(
       child: Center(
