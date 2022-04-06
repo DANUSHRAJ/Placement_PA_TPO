@@ -15,6 +15,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'API/toggle.api.dart';
 import 'Forms/forms_homepage.dart';
 import 'Screens/Intership.dart';
+import 'Screens/Notifications.dart';
 import 'Widgets/webview.dart';
 import 'dart:math' as math;
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
@@ -684,6 +685,12 @@ class DrawerFb1 extends StatelessWidget {
         //           selectedUrl: "https://www.google.com/forms/about/",
         //         )));
         break;
+
+      case 5:
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const Notifications(), // Page 1
+        ));
+        break;
     }
   }
 }
@@ -774,86 +781,6 @@ class _ZoomDrawerTestState extends State<ZoomDrawerTest> {
 
 //toggle switch
 
-// class ToggleSwitch extends StatefulWidget {
-//   final String cardname;
-
-//   ToggleSwitch({Key? key, required this.cardname}) : super(key: key);
-
-//   @override
-//   State<ToggleSwitch> createState() => _ToggleSwitchState();
-// }
-
-// class _ToggleSwitchState extends State<ToggleSwitch> {
-//   var _controller00;
-//   bool _enabled = false;
-
-//   Future<void> __updatestatus(String cardname, int value) async {
-//     ToggleApi api = ToggleApi();
-//     await api.toggleStatus(cardname, value);
-//     print("sucess");
-//   }
-
-//   Future<void> _getstatus(String cardname) async {
-//     ToggleApi api = ToggleApi();
-//     int result1 = (await api.getCurrentToogleStatus(cardname)) as int;
-//     _enabled = result1 == 1 ? true : false;
-//     if (_enabled)
-//       _controller00 = ValueNotifier<bool>(true);
-//     else
-//       _controller00 = ValueNotifier<bool>(false);
-//     print("get success");
-//   }
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     _getstatus(widget.cardname);
-//     // _controller00.initState(() {});
-
-//     _controller00.addListener(() {
-//       setState(() {
-//         if (_controller00.value) {
-//           _enabled = true;
-//           __updatestatus(widget.cardname, 1);
-//         } else {
-//           _enabled = false;
-//           __updatestatus(widget.cardname, 0);
-//         }
-//       });
-//     });
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     print("sucess");
-//     return Container(
-//         //width: double.infinity,
-//         child: SingleChildScrollView(
-//             physics: ClampingScrollPhysics(),
-//             child: Column(
-//                 crossAxisAlignment: CrossAxisAlignment.center,
-//                 mainAxisAlignment: MainAxisAlignment.center,
-//                 children: [
-//                   Row(
-//                     mainAxisSize: MainAxisSize.max,
-//                     mainAxisAlignment: MainAxisAlignment.spaceAround,
-//                     children: [
-//                       Padding(
-//                         padding: const EdgeInsets.all(8.0),
-//                         child: AdvancedSwitch(
-//                           activeChild: Text('ON'),
-//                           inactiveChild: Text('OFF'),
-//                           borderRadius: BorderRadius.circular(15),
-//                           width: 60,
-//                           controller: _controller00,
-//                         ),
-//                       ),
-//                     ],
-//                   ),
-//                 ])));
-//   }
-// }
-
 class Toggle extends StatefulWidget {
   final String cardname;
 
@@ -905,3 +832,17 @@ class _ToggleState extends State<Toggle> {
     );
   }
 }
+
+// class Notification extends StatefulWidget {
+//   const Notification({Key? key}) : super(key: key);
+
+//   @override
+//   State<Notification> createState() => _NotificationState();
+// }
+
+// class _NotificationState extends State<Notification> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container();
+//   }
+// }

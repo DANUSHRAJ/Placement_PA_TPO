@@ -5,8 +5,7 @@ import 'package:dio/dio.dart';
 class ToggleApi {
 //  static String apiUrl = 'https://6081-27-57-63-29.ngrok.io'  'http://127.0.0.1:8081'  'https://sppdemo.herokuapp.com';
 
-  static String apiUrl =
-      'https://b9d5-2401-4900-230a-949f-b01b-ffc4-c13b-2ba4.ngrok.io';
+  static String apiUrl = 'https://d5c5-183-82-178-157.ngrok.io';
 
   final _dio = Dio(BaseOptions(baseUrl: apiUrl));
 
