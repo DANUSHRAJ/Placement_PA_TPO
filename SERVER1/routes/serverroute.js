@@ -25,6 +25,9 @@ server_router.get("/dwnDataJSON",service.dwnDataJSON);
 //http://localhost:8080/dwnData
 server_router.get("/dwnData",service.dwnData);
 
+//http://localhost:8080/getTokenIdByBatchNew
+server_router.post("/getTokenIdByBatchNew",service.getTokenIdByBatchNew);
+
 //http://localhost:8080/getaccounts
 server_router.get("/getaccounts",service.getaccounts);
 
