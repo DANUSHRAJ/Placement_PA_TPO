@@ -1,7 +1,15 @@
+import 'dart:convert';
+
+import 'package:admin_sjit_pp/API/forms.api.dart';
+import 'package:admin_sjit_pp/API/notification.api.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart';
 
 import '../Home_screen.dart';
+
+  TextEditingController heading = new TextEditingController();
+  TextEditingController message = new TextEditingController();
 
 class Notifications extends StatefulWidget {
   const Notifications({Key? key}) : super(key: key);
@@ -11,8 +19,6 @@ class Notifications extends StatefulWidget {
 }
 
 class _NotificationsState extends State<Notifications> {
-  TextEditingController heading = new TextEditingController();
-  TextEditingController message = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -272,11 +278,45 @@ class _ThumbsUpButtonState extends State<ThumbsUpButton> {
       icon: Icon(isLiked ? Icons.thumb_up_alt_outlined : Icons.send,
           color: widget.color),
       onPressed: () {
+        fetchDetails();
         setState(() {
           isLiked = !isLiked;
         });
-        widget.onPressed();
       },
     ));
+  }
+
+  fetchDetails() async {
+    NotificationApi api = NotificationApi();
+    List<String> result = await api.getTokenIdByBatch("2023");
+    await sendNotification(result,heading.value.text,message.value.text);
+  }
+
+  Future<void> sendNotification(
+      List<String?> tokenIdList, String heading, String contents) async {
+        print("Notification Success!");
+    await post(
+      Uri.parse('https://onesignal.com/api/v1/notifications'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, dynamic>{
+        "app_id": '777c9b28-93c5-4aa4-bd2a-25c4e5515460',
+
+        "include_player_ids": tokenIdList,
+
+        // android_accent_color reprsent the color of the heading text in the notifiction
+        "android_accent_color": "FF9976D2",
+
+        // "small_icon":"ic_stat_onesignal_default",
+
+        "large_icon":
+            "https://pub.dev/static/img/pub-dev-logo-2x.png?hash=umitaheu8hl7gd3mineshk2koqfngugi",
+
+        "headings": {"en": heading},
+
+        "contents": {"en": contents},
+      }),
+    );
   }
 }
