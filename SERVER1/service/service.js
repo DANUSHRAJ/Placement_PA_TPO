@@ -118,7 +118,22 @@ module.exports.dwnData = async (req,res)=>{
         console.log("Done writing accounts to file");
         });
 }
-
+module.exports.getTokenIdByBatch = async (req,res)=>{
+    try{
+        let batchval = req.body.batch;
+        print(batch);
+        const result = await client.db("Cluster0").collection("accounts").find({batch:batchval});
+        var resultfinal = [];
+        await result.forEach(element => {
+            if(element.tokenId != null)
+                resultfinal.push(element.tokenId);
+        });
+        // console.log(resultfinal);
+        res.send({"token":resultfinal});
+    } catch(err){
+        console.log(err);
+    }
+};
 module.exports.getaccounts = async (req,res)=>{
     try{
         const result = await client.db("Cluster0").collection("accounts").find();
