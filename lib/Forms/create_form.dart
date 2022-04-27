@@ -11,8 +11,7 @@ class CreateForm extends StatefulWidget {
   const CreateForm(this.final_data, {Key? key}) : super(key: key);
 
   @override
-  _CreateFormState createState() =>
-      _CreateFormState(final_data: final_data);
+  _CreateFormState createState() => _CreateFormState(final_data: final_data);
 }
 
 class _CreateFormState extends State<CreateForm> {
@@ -26,7 +25,7 @@ class _CreateFormState extends State<CreateForm> {
 
   dynamic final_data;
   String title = '';
-  String date='';
+  String date = '';
   String _result = '';
   List<dynamic> _values = [];
 

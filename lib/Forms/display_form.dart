@@ -47,22 +47,21 @@ class _DisplayFormState extends State<DisplayForm> {
                 showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
-                      elevation: 15,
-                      backgroundColor: const Color(0xffffffff),
-                      shape: RoundedRectangleBorder(
-                        borderRadius:
-                        BorderRadius.circular(20.0),
-                      ),
-                      title: const Text('Form Created Successfully'),
-                      actions: [
-                        TextButton(
-                            //onPressed: (){},
-                            //onPressed: ()=> Navigator.popUntil(context, ModalRoute.withName('/formHome')),
-                            onPressed: ()=> Navigator.popAndPushNamed(context, '/formHome'),
-                            child: const Text('Ok')),
-                      ],
-                    )
-                );
+                          elevation: 15,
+                          backgroundColor: const Color(0xffffffff),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          title: const Text('Form Created Successfully'),
+                          actions: [
+                            TextButton(
+                                //onPressed: (){},
+                                //onPressed: ()=> Navigator.popUntil(context, ModalRoute.withName('/formHome')),
+                                onPressed: () => Navigator.popAndPushNamed(
+                                    context, '/formHome'),
+                                child: const Text('Ok')),
+                          ],
+                        ));
               },
               icon: const Icon(Icons.done_outlined))
         ],

@@ -171,7 +171,8 @@ class _FormHomeState extends State<FormHome> {
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                          CreateForm(formdata)));
+                                                          CreateForm(
+                                                              formdata)));
                                             },
                                             child: const Text('Create'),
                                           ),
@@ -181,13 +182,14 @@ class _FormHomeState extends State<FormHome> {
                             subText: ""),
                         const SizedBox(height: 50),
                         SplashButton(
-                            title: "VIEW FORMS", onPressed: () {
+                            title: "VIEW FORMS",
+                            onPressed: () {
                               Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          FormList()));
-                            }, subText: "")
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => FormList()));
+                            },
+                            subText: "")
                       ]),
 
                   // GestureDetector(
