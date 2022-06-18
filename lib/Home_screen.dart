@@ -21,6 +21,8 @@ import 'Widgets/webview.dart';
 import 'dart:math' as math;
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 
+bool loading = false;
+
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
 
@@ -31,7 +33,9 @@ class HomeScreen extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Center(
+      body: loading
+            ? Center(child: Lottie.asset('assets/images/landing1.json'))
+            : Center(
         child: Stack(
           children: [
             Container(
@@ -505,15 +509,24 @@ class _ToggleSwitchState extends State<ToggleSwitch> {
     await api.toggleStatus(cardname, value);
     print("sucess");
   }
-
-  Future<void> _getstatus(String cardname) async {
-    ToggleApi api = ToggleApi();
-    var result1 = await api.getCurrentToogleStatus(cardname);
-    // print("Result1: " + result1);
-    isSwitched = result1 == "1" ? true : false;
-    build(context);
-    print("sucess");
-    print(isSwitched);
+  
+  Future<void> _getstatus(String cardname, [bool showSpinner = false]) async {
+    if (showSpinner) {
+      setState(() {
+        loading = true;
+      });
+    }
+      ToggleApi api = ToggleApi();
+      await api.getCurrentToogleStatus(cardname).then((value)=>{
+        setState(() {
+          // print("Result1: " + result1);
+          isSwitched = value == "1" ? true : false;
+          build(context);
+          print("sucess");
+          print(isSwitched);
+          loading = false;
+        })
+      });
   }
 
   late Timer timer;
@@ -523,7 +536,7 @@ class _ToggleSwitchState extends State<ToggleSwitch> {
     super.initState();
 
     // setState(() {
-    _getstatus(widget.cardname);
+    _getstatus(widget.cardname,true);
 
     _controller01 = ValueNotifier<bool>(isSwitched);
     print("The Switch value is:");
