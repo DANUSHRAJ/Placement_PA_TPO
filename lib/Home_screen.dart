@@ -56,12 +56,12 @@ class HomeScreen extends StatelessWidget {
       });
     }
     // setState(() {
-      switch1 = await _getstatus("profile");
-      switch2 = await _getstatus("interns");
-      switch3 = await _getstatus("workshop");
-      switch4 = await _getstatus("course");
-      switch5 = await _getstatus("placements");
-      loading = false;
+    switch1 = await _getstatus("profile");
+    switch2 = await _getstatus("interns");
+    switch3 = await _getstatus("workshop");
+    switch4 = await _getstatus("course");
+    switch5 = await _getstatus("placements");
+    loading = false;
     // });
   }
 
@@ -69,7 +69,6 @@ class HomeScreen extends StatelessWidget {
   void initState() {
     // super.initState();
     _getAllStatus();
-
 
     // _controller01.addListener(() {
     //   setState(() {
@@ -556,7 +555,8 @@ class _ZoomDrawerTestState extends State<ZoomDrawerTest> {
 class ToggleSwitch extends StatefulWidget {
   final String cardname;
   final int status;
-  const ToggleSwitch({Key? key, required this.cardname, required this.status}) : super(key: key);
+  const ToggleSwitch({Key? key, required this.cardname, required this.status})
+      : super(key: key);
 
   @override
   State<ToggleSwitch> createState() => _ToggleSwitchState(status: status);
@@ -591,7 +591,7 @@ class _ToggleSwitchState extends State<ToggleSwitch> {
   @override
   void initState() {
     super.initState();
-    if(status == 0)
+    if (status == 0)
       _controller01 = ValueNotifier<bool>(false);
     else
       _controller01 = ValueNotifier<bool>(true);
