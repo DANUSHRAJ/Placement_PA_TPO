@@ -24,6 +24,64 @@ import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
 
+  bool loading = false;
+
+  int isSwitched = 0;
+  int switch1 = 0;
+  int switch2 = 0;
+  int switch3 = 0;
+  int switch4 = 0;
+  int switch5 = 0;
+
+  Future<void> __updatestatus(String cardname, int value) async {
+    ToggleApi api = ToggleApi();
+    await api.toggleStatus(cardname, value);
+    print("sucess");
+  }
+
+  Future<int> _getstatus(String cardname) async {
+    ToggleApi api = ToggleApi();
+    var result1 = await api.getCurrentToogleStatus(cardname);
+    // print("Result1: " + result1);
+    isSwitched = result1 == "1" ? 1 : 0;
+    print("sucess");
+    print(isSwitched);
+    return isSwitched;
+  }
+
+  Future<void> _getAllStatus([bool showSpinner = false]) async {
+    if (showSpinner) {
+      setState(() {
+        loading = true;
+      });
+    }
+    // setState(() {
+      switch1 = await _getstatus("profile");
+      switch2 = await _getstatus("interns");
+      switch3 = await _getstatus("workshop");
+      switch4 = await _getstatus("course");
+      switch5 = await _getstatus("placements");
+      loading = false;
+    // });
+  }
+
+  @override
+  void initState() {
+    // super.initState();
+    _getAllStatus();
+
+
+    // _controller01.addListener(() {
+    //   setState(() {
+    //     if (_controller01.value) {
+    //       _themeDark = true;
+    //     } else {
+    //       _themeDark = false;
+    //     }
+    //   });
+    // });
+  }
+
   @override
   Widget build(BuildContext context) {
     EasyLoading.init();
@@ -83,6 +141,7 @@ class HomeScreen extends StatelessWidget {
                             CardFb1(
                                 text: "PROFILE",
                                 cardname: "profile",
+                                status: switch1,
                                 imageUrl:
                                     "https://assets7.lottiefiles.com/private_files/lf30_LOw4AL.json",
                                 subtitle: "__ __",
@@ -90,6 +149,7 @@ class HomeScreen extends StatelessWidget {
                             CardFb1(
                                 text: "INTERNSHIPS",
                                 cardname: "interns",
+                                status: switch2,
                                 imageUrl:
                                     "https://assets3.lottiefiles.com/packages/lf20_m0ze3ipv.json",
                                 subtitle: "__ ___",
@@ -105,6 +165,7 @@ class HomeScreen extends StatelessWidget {
                             CardFb1(
                                 text: "WORKSHOPS",
                                 cardname: "workshop",
+                                status: switch3,
                                 imageUrl:
                                     "https://assets7.lottiefiles.com/private_files/lf30_LOw4AL.json",
                                 subtitle: "__ __",
@@ -112,6 +173,7 @@ class HomeScreen extends StatelessWidget {
                             CardFb1(
                                 text: "COURSES",
                                 cardname: "course",
+                                status: switch4,
                                 imageUrl:
                                     "https://assets7.lottiefiles.com/private_files/lf30_LOw4AL.json",
                                 subtitle: "__ __",
@@ -127,6 +189,7 @@ class HomeScreen extends StatelessWidget {
                             CardFb1(
                                 text: "PLACEMENTS",
                                 cardname: "placements",
+                                status: switch5,
                                 imageUrl:
                                     "https://assets7.lottiefiles.com/private_files/lf30_LOw4AL.json",
                                 subtitle: "__ __",
@@ -242,11 +305,13 @@ class CardFb1 extends StatelessWidget {
   final String imageUrl;
   final String subtitle;
   final Function() onPressed;
+  final int status;
   final String cardname;
 
   const CardFb1(
       {required this.text,
       required this.cardname,
+      required this.status,
       required this.imageUrl,
       required this.subtitle,
       required this.onPressed,
@@ -297,7 +362,7 @@ class CardFb1 extends StatelessWidget {
               style: TextStyle(color: Colors.black, fontSize: 18),
             ),
             //ToggleSwitch(cardname: cardname),
-            ToggleSwitch(cardname: cardname),
+            ToggleSwitch(cardname: cardname, status: status),
             //Toggle(cardname: cardname),
           ],
         ),
@@ -490,13 +555,18 @@ class _ZoomDrawerTestState extends State<ZoomDrawerTest> {
 
 class ToggleSwitch extends StatefulWidget {
   final String cardname;
-  const ToggleSwitch({Key? key, required this.cardname}) : super(key: key);
+  final int status;
+  const ToggleSwitch({Key? key, required this.cardname, required this.status}) : super(key: key);
 
   @override
-  State<ToggleSwitch> createState() => _ToggleSwitchState();
+  State<ToggleSwitch> createState() => _ToggleSwitchState(status: status);
 }
 
 class _ToggleSwitchState extends State<ToggleSwitch> {
+  int status;
+
+  _ToggleSwitchState({required this.status});
+
   var _controller01 = ValueNotifier<bool>(false);
   bool isSwitched = false;
 
@@ -519,18 +589,12 @@ class _ToggleSwitchState extends State<ToggleSwitch> {
   late Timer timer;
 
   @override
-  Future<void> initState() async {
+  void initState() {
     super.initState();
-
-    // setState(() {
-    await _getstatus(widget.cardname);
-
-    _controller01 = ValueNotifier<bool>(isSwitched);
-    print("The Switch value is:");
-    print(isSwitched);
-    print("The controller value is:");
-    print(_controller01);
-    // });
+    if(status == 0)
+      _controller01 = ValueNotifier<bool>(false);
+    else
+      _controller01 = ValueNotifier<bool>(true);
 
     // _controller01.addListener(() {
     //   setState(() {
