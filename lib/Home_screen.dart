@@ -6,6 +6,7 @@ import 'package:admin_sjit_pp/Screens/Profile.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
@@ -25,6 +26,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    EasyLoading.init();
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -61,32 +63,6 @@ class HomeScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         SizedBox(height: height * .2),
-                        // Column(
-                        // children: [
-                        // Text(
-                        //   'DashBoard',
-                        //   textAlign: TextAlign.justify,
-                        //   style: GoogleFonts.adventPro(
-                        //       color: Colors.orange,
-                        //       fontSize: 25,
-                        //       fontWeight: FontWeight.bold),
-                        // ),
-                        // Padding(
-                        //   padding: const EdgeInsets.all(10.0),
-                        //   child: SizedBox(
-                        //       height: height * .3,
-                        //       child: MyHomePage(
-                        //         title: '',
-                        //       )
-
-                        //       // const _LineChart(
-                        //       //   isShowingMainData: true,
-                        //       // ),
-                        //       ),
-                        // ),
-                        //   ],
-                        //),
-
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Align(
@@ -120,7 +96,6 @@ class HomeScreen extends StatelessWidget {
                                 onPressed: () {}),
                           ],
                         ),
-
                         SizedBox(
                           height: height * .05,
                         ),
@@ -205,10 +180,10 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const Align(
-                    alignment: Alignment.bottomCenter,
-                    child: const BottomNavBarCurvedFb1(),
-                  ),
+                  // const Align(
+                  //   alignment: Alignment.bottomCenter,
+                  //   child: const BottomNavBarCurvedFb1(),
+                  // ),
                   //SwitchScreen(),
                 ]),
               ),
@@ -220,314 +195,47 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class BottomNavBarCurvedFb1 extends StatefulWidget {
-  const BottomNavBarCurvedFb1({Key? key}) : super(key: key);
-
-  @override
-  _BottomNavBarCurvedFb1State createState() => _BottomNavBarCurvedFb1State();
-}
-
-class _BottomNavBarCurvedFb1State extends State<BottomNavBarCurvedFb1> {
-  @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    double height = 70;
-
-    final primaryColor = Colors.orange;
-    final secondaryColor = Colors.black54;
-    final accentColor = const Color(0xffffffff);
-    final backgroundColor = Colors.white;
-
-    return BottomAppBar(
-      color: Colors.transparent,
-      elevation: 10,
-      child: Stack(
-        children: [
-          CustomPaint(
-            size: Size(size.width, height + 6),
-            painter: BottomNavCurvePainter(backgroundColor: backgroundColor),
-          ),
-          Center(
-            heightFactor: 0.6,
-            child: FloatingActionButton(
-                backgroundColor: primaryColor,
-                child: const Icon(Icons.home_filled),
-                elevation: 0.1,
-                onPressed: () {
-                  showdialog(context, "Are you sure to leave");
-                }),
-          ),
-          Container(
-            height: height,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                NavBarIcon(
-                  text: "Profile Search",
-                  icon: Icons.search_outlined,
-                  selected: false,
-                  onPressed: () {},
-                  defaultColor: secondaryColor,
-                  selectedColor: primaryColor,
-                ),
-                NavBarIcon(
-                  text: "Interships",
-                  icon: Icons.celebration_outlined,
-                  selected: false,
+Future showdialog(BuildContext context, String message) async {
+  return showDialog(
+      context: context,
+      builder: (context) => new AlertDialog(
+            title: new Text(message),
+            actions: [
+              new FlatButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        PageTransition(
-                            type: PageTransitionType.bottomToTop,
-                            child: const Intership()));
+                    Navigator.of(context).pop();
                   },
-                  defaultColor: secondaryColor,
-                  selectedColor: primaryColor,
-                ),
-                const SizedBox(width: 56),
-                NavBarIcon(
-                    text: "Workshops",
-                    icon: Icons.handyman_outlined,
-                    selected: false,
-                    onPressed: () {},
-                    defaultColor: secondaryColor,
-                    selectedColor: primaryColor),
-                NavBarIcon(
-                  text: "History",
-                  icon: Icons.history_edu_outlined,
-                  selected: false,
+                  child: new Text(
+                    'Cancel',
+                    style: GoogleFonts.adventPro(
+                        fontSize: 15,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold),
+                  )),
+              new RaisedButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        PageTransition(
-                            type: PageTransitionType.bottomToTop,
-                            child: const History()));
+                    if (Platform.isAndroid) {
+                      Future.delayed(const Duration(milliseconds: 1000), () {
+                        SystemChannels.platform
+                            .invokeMethod('SystemNavigator.pop');
+                      });
+                    } else if (Platform.isIOS) {
+                      exit(0);
+                    } else {
+                      exit(0);
+                    }
                   },
-                  selectedColor: primaryColor,
-                  defaultColor: secondaryColor,
-                )
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Future showdialog(BuildContext context, String message) async {
-    return showDialog(
-        context: context,
-        builder: (context) => new AlertDialog(
-              title: new Text(message),
-              actions: [
-                new FlatButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: new Text(
-                      'Cancel',
-                      style: GoogleFonts.adventPro(
-                          fontSize: 15,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold),
-                    )),
-                new RaisedButton(
-                    onPressed: () {
-                      if (Platform.isAndroid) {
-                        Future.delayed(const Duration(milliseconds: 1000), () {
-                          SystemChannels.platform
-                              .invokeMethod('SystemNavigator.pop');
-                        });
-                      } else if (Platform.isIOS) {
-                        exit(0);
-                      } else {
-                        exit(0);
-                      }
-                    },
-                    child: new Text(
-                      'Yes',
-                      style: GoogleFonts.adventPro(
-                          fontSize: 15,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold),
-                    ))
-                //Text("Confirm", TextStyle())),
-              ],
-            ));
-  }
+                  child: new Text(
+                    'Yes',
+                    style: GoogleFonts.adventPro(
+                        fontSize: 15,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold),
+                  ))
+              //Text("Confirm", TextStyle())),
+            ],
+          ));
 }
-
-class BottomNavCurvePainter extends CustomPainter {
-  BottomNavCurvePainter(
-      {this.backgroundColor = Colors.white, this.insetRadius = 38});
-
-  Color backgroundColor;
-  double insetRadius;
-  @override
-  void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()
-      ..color = backgroundColor
-      ..style = PaintingStyle.fill;
-    Path path = Path()..moveTo(0, 12);
-
-    double insetCurveBeginnningX = size.width / 2 - insetRadius;
-    double insetCurveEndX = size.width / 2 + insetRadius;
-    double transitionToInsetCurveWidth = size.width * .08;
-    path.quadraticBezierTo(size.width * 0.20, 0,
-        insetCurveBeginnningX - transitionToInsetCurveWidth, 0);
-    path.quadraticBezierTo(
-        insetCurveBeginnningX, 0, insetCurveBeginnningX, insetRadius / 2);
-
-    path.arcToPoint(Offset(insetCurveEndX, insetRadius / 2),
-        radius: const Radius.circular(20.0), clockwise: false);
-
-    path.quadraticBezierTo(
-        insetCurveEndX, 0, insetCurveEndX + transitionToInsetCurveWidth, 0);
-    path.quadraticBezierTo(size.width * 0.80, 0, size.width, 12);
-    path.lineTo(size.width, size.height + 56);
-    path.lineTo(
-        0,
-        size.height +
-            56); //+56 here extends the navbar below app bar to include extra space on some screens (iphone 11)
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return false;
-  }
-}
-
-class NavBarIcon extends StatelessWidget {
-  const NavBarIcon(
-      {Key? key,
-      required this.text,
-      required this.icon,
-      required this.selected,
-      required this.onPressed,
-      this.selectedColor = const Color(0xFFEB7C27),
-      this.defaultColor = Colors.black54})
-      : super(key: key);
-  final String text;
-  final IconData icon;
-  final bool selected;
-  final Function() onPressed;
-  final Color defaultColor;
-  final Color selectedColor;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        IconButton(
-          onPressed: onPressed,
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-          icon: Icon(
-            icon,
-            size: 25,
-            color: selected ? selectedColor : defaultColor,
-          ),
-        ),
-        Text(
-          text,
-          style: TextStyle(
-              fontSize: 10,
-              //height: .1,
-              color: selected ? Colors.amber : Colors.grey.withOpacity(.75)),
-        )
-      ],
-    );
-  }
-}
-
-// class CustomCarouselFB2 extends StatefulWidget {
-//   const CustomCarouselFB2({Key? key}) : super(key: key);
-
-//   @override
-//   _CustomCarouselFB2State createState() => _CustomCarouselFB2State();
-// }
-
-// class _CustomCarouselFB2State extends State<CustomCarouselFB2> {
-//   // - - - - - - - - - - - - Instructions - - - - - - - - - - - - - -
-//   // Learn to build this widget at https://www.youtube.com/watch?v=dSMw1Nb0QVg!
-//   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-//   List<Widget> cards = [
-//     CardFb1(
-//         text: "PROFILE",
-//         imageUrl:
-//             "https://assets7.lottiefiles.com/private_files/lf30_LOw4AL.json",
-//         subtitle: "__ __",
-//         onPressed: () {}),
-//     CardFb1(
-//         text: "INTERNSHIPS",
-//         imageUrl: "https://assets3.lottiefiles.com/packages/lf20_m0ze3ipv.json",
-//         subtitle: "__ ___",
-//         onPressed: () {}),
-//     CardFb1(
-//         text: "WORKSHOPS",
-//         imageUrl:
-//             "https://assets7.lottiefiles.com/private_files/lf30_LOw4AL.json",
-//         subtitle: "__ __",
-//         onPressed: () {}),
-//     CardFb1(
-//         text: "COURSES",
-//         imageUrl:
-//             "https://assets7.lottiefiles.com/private_files/lf30_LOw4AL.json",
-//         subtitle: "__ __",
-//         onPressed: () {}),
-//     CardFb1(
-//         text: "PLACEMENTS",
-//         imageUrl:
-//             "https://assets7.lottiefiles.com/private_files/lf30_LOw4AL.json",
-//         subtitle: "__ __",
-//         onPressed: () {})
-//   ];
-
-//   final double carouselItemMargin = 5;
-
-//   late PageController _pageController;
-//   int _position = 0;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     _pageController =
-//         PageController(initialPage: 0, viewportFraction: .4, keepPage: false);
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return PageView.builder(
-//         controller: _pageController,
-//         itemCount: cards.length,
-//         onPageChanged: (int position) {
-//           setState(() {
-//             _position = position;
-//           });
-//         },
-//         itemBuilder: (BuildContext context, int position) {
-//           return imageSlider(position);
-//         });
-//   }
-
-//   Widget imageSlider(int position) {
-//     return AnimatedBuilder(
-//       animation: _pageController,
-//       builder: (BuildContext context, widget) {
-//         return Container(
-//           margin: EdgeInsets.all(carouselItemMargin),
-//           child: Center(child: widget),
-//         );
-//       },
-//       child: Container(
-//         child: cards[position],
-//       ),
-//     );
-//   }
-// }
 
 class CardFb1 extends StatelessWidget {
   final String text;
@@ -589,7 +297,8 @@ class CardFb1 extends StatelessWidget {
               style: TextStyle(color: Colors.black, fontSize: 18),
             ),
             //ToggleSwitch(cardname: cardname),
-            Toggle(cardname: cardname),
+            ToggleSwitch(cardname: cardname),
+            //Toggle(cardname: cardname),
           ],
         ),
       ),
@@ -779,17 +488,16 @@ class _ZoomDrawerTestState extends State<ZoomDrawerTest> {
   }
 }
 
-//toggle switch
-
-class Toggle extends StatefulWidget {
+class ToggleSwitch extends StatefulWidget {
   final String cardname;
+  const ToggleSwitch({Key? key, required this.cardname}) : super(key: key);
 
-  Toggle({Key? key, required this.cardname}) : super(key: key);
   @override
-  _ToggleState createState() => _ToggleState();
+  State<ToggleSwitch> createState() => _ToggleSwitchState();
 }
 
-class _ToggleState extends State<Toggle> {
+class _ToggleSwitchState extends State<ToggleSwitch> {
+  var _controller01 = ValueNotifier<bool>(false);
   bool isSwitched = false;
 
   Future<void> __updatestatus(String cardname, int value) async {
@@ -804,34 +512,110 @@ class _ToggleState extends State<Toggle> {
     // print("Result1: " + result1);
     isSwitched = result1 == "1" ? true : false;
     build(context);
-    // print("get success");
+    print("sucess");
+    print(isSwitched);
   }
+
+  late Timer timer;
 
   @override
   void initState() {
     super.initState();
+
+    // setState(() {
     _getstatus(widget.cardname);
+
+    _controller01 = ValueNotifier<bool>(isSwitched);
+    print("The Switch value is:");
+    print(isSwitched);
+    print("The controller value is:");
+    print(_controller01);
+    // });
+
+    // _controller01.addListener(() {
+    //   setState(() {
+    //     if (_controller01.value) {
+    //       _themeDark = true;
+    //     } else {
+    //       _themeDark = false;
+    //     }
+    //   });
+    // });
   }
 
-  // @override
+  @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(
-        child: Switch(
-          value: isSwitched,
-          onChanged: (value) {
-            setState(() {
-              isSwitched = value;
-              print(isSwitched);
-            });
-          },
-          activeTrackColor: Colors.lightGreenAccent,
-          activeColor: Colors.green,
-        ),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          AdvancedSwitch(
+            activeChild: Text('ON'),
+            inactiveChild: Text('OFF'),
+            borderRadius: BorderRadius.circular(15),
+            width: 56,
+            controller: _controller01,
+          ),
+        ],
       ),
     );
   }
 }
+
+//toggle switch
+
+// class Toggle extends StatefulWidget {
+//   final String cardname;
+
+//   Toggle({Key? key, required this.cardname}) : super(key: key);
+//   @override
+//   _ToggleState createState() => _ToggleState();
+// }
+
+// class _ToggleState extends State<Toggle> {
+//   bool isSwitched = false;
+
+//   Future<void> __updatestatus(String cardname, int value) async {
+//     ToggleApi api = ToggleApi();
+//     await api.toggleStatus(cardname, value);
+//     print("sucess");
+//   }
+
+//   Future<void> _getstatus(String cardname) async {
+//     ToggleApi api = ToggleApi();
+//     var result1 = await api.getCurrentToogleStatus(cardname);
+//     // print("Result1: " + result1);
+//     isSwitched = result1 == "1" ? true : false;
+//     build(context);
+//     // print("get success");
+//   }
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     _getstatus(widget.cardname);
+//   }
+
+//   // @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       child: Center(
+//         child: Switch(
+//           value: isSwitched,
+//           onChanged: (value) {
+//             setState(() {
+//               isSwitched = value;
+//               print(isSwitched);
+//             });
+//           },
+//           activeTrackColor: Colors.lightGreenAccent,
+//           activeColor: Colors.green,
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 // class Notification extends StatefulWidget {
 //   const Notification({Key? key}) : super(key: key);

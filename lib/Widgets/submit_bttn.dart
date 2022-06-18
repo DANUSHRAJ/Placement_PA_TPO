@@ -72,8 +72,9 @@ class _SubmitBttnState extends State<SubmitBttn> {
       alignment: Alignment.centerRight,
       child: InkWell(
         onTap: () async {
-          // await changeToggle();
-          // await generateNotification();
+          //await changeToggle();
+          await generateNotification();
+
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => HomeScreen()));
         },

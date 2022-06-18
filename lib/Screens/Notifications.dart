@@ -8,8 +8,8 @@ import 'package:http/http.dart';
 
 import '../Home_screen.dart';
 
-  TextEditingController heading = new TextEditingController();
-  TextEditingController message = new TextEditingController();
+TextEditingController heading = new TextEditingController();
+TextEditingController message = new TextEditingController();
 
 class Notifications extends StatefulWidget {
   const Notifications({Key? key}) : super(key: key);
@@ -47,24 +47,27 @@ class _NotificationsState extends State<Notifications> {
       body: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          child: Column(
-            children: <Widget>[
-              SizedBox(height: 150),
-              Align(
-                  alignment: Alignment.center,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child:
-                        EmailInputFb3(inputController: heading, val: "Heading"),
-                  )),
-              SizedBox(height: 50),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: EmailInputFb2(inputController: message, val: "Message"),
-              ),
-              //  EmailInputFb1(),
-              // ThumbsUpButton(onPressed: () {}, color: Colors.orange),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                SizedBox(height: 150),
+                Align(
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: EmailInputFb3(
+                          inputController: heading, val: "Heading"),
+                    )),
+                SizedBox(height: 50),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child:
+                      EmailInputFb2(inputController: message, val: "Message"),
+                ),
+                //  EmailInputFb1(),
+                // ThumbsUpButton(onPressed: () {}, color: Colors.orange),
+              ],
+            ),
           )),
     );
   }
@@ -109,71 +112,73 @@ class EmailInputFb2 extends StatelessWidget {
     const backgroundColor = Colors.amber;
     const errorColor = Color(0xffEF4444);
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          val,
-          textAlign: TextAlign.justify,
-          style: GoogleFonts.adventPro(
-              fontSize: 15,
-              color: Colors.orangeAccent,
-              fontWeight: FontWeight.bold),
-        ),
-        const SizedBox(
-          height: 8,
-        ),
-        Container(
-          height: 250,
-          decoration: BoxDecoration(boxShadow: [
-            BoxShadow(
-                offset: const Offset(12, 26),
-                blurRadius: 50,
-                spreadRadius: 0,
-                color: Colors.grey.withOpacity(.1)),
-          ]),
-          child: TextField(
-            controller: inputController,
-            onChanged: (value) {
-              //Do something wi
-            },
-            // keyboardType: TextInputType.emailAddress,
-            keyboardType: TextInputType.multiline,
-            // minLines: 1,
-            maxLines: 1000,
-            maxLength: 100000,
-            style: const TextStyle(fontSize: 15, color: Colors.black),
-            decoration: InputDecoration(
-              label: const Text("Message"),
-              labelStyle: const TextStyle(color: primaryColor),
-              // prefixIcon: Icon(Icons.email),
-              filled: true,
-              fillColor: accentColor,
-              hintText: 'Enter your Message here',
-              hintStyle: TextStyle(color: Colors.grey.withOpacity(.75)),
-              contentPadding: EdgeInsets.all(8.0),
-              //d  const EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
-              border: const OutlineInputBorder(
-                borderSide: BorderSide(color: primaryColor, width: 1.0),
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
-              ),
-              focusedBorder: const OutlineInputBorder(
-                borderSide: BorderSide(color: secondaryColor, width: 1.0),
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
-              ),
-              errorBorder: const OutlineInputBorder(
-                borderSide: BorderSide(color: errorColor, width: 1.0),
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
-              ),
-              enabledBorder: const OutlineInputBorder(
-                borderSide: BorderSide(color: primaryColor, width: 1.0),
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            val,
+            textAlign: TextAlign.justify,
+            style: GoogleFonts.adventPro(
+                fontSize: 15,
+                color: Colors.orangeAccent,
+                fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          Container(
+            height: 250,
+            decoration: BoxDecoration(boxShadow: [
+              BoxShadow(
+                  offset: const Offset(12, 26),
+                  blurRadius: 50,
+                  spreadRadius: 0,
+                  color: Colors.grey.withOpacity(.1)),
+            ]),
+            child: TextField(
+              controller: inputController,
+              onChanged: (value) {
+                //Do something wi
+              },
+              // keyboardType: TextInputType.emailAddress,
+              keyboardType: TextInputType.multiline,
+              // minLines: 1,
+              maxLines: 1000,
+              maxLength: 100000,
+              style: const TextStyle(fontSize: 15, color: Colors.black),
+              decoration: InputDecoration(
+                label: const Text("Message"),
+                labelStyle: const TextStyle(color: primaryColor),
+                // prefixIcon: Icon(Icons.email),
+                filled: true,
+                fillColor: accentColor,
+                hintText: 'Enter your Message here',
+                hintStyle: TextStyle(color: Colors.grey.withOpacity(.75)),
+                contentPadding: EdgeInsets.all(8.0),
+                //d  const EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
+                border: const OutlineInputBorder(
+                  borderSide: BorderSide(color: primaryColor, width: 1.0),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                ),
+                focusedBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(color: secondaryColor, width: 1.0),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                ),
+                errorBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(color: errorColor, width: 1.0),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                ),
+                enabledBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(color: primaryColor, width: 1.0),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -289,12 +294,12 @@ class _ThumbsUpButtonState extends State<ThumbsUpButton> {
   fetchDetails() async {
     NotificationApi api = NotificationApi();
     List<String> result = await api.getTokenIdByBatch("2023");
-    await sendNotification(result,heading.value.text,message.value.text);
+    await sendNotification(result, heading.value.text, message.value.text);
   }
 
   Future<void> sendNotification(
       List<String?> tokenIdList, String heading, String contents) async {
-        print("Notification Success!");
+    print("Notification Success!");
     await post(
       Uri.parse('https://onesignal.com/api/v1/notifications'),
       headers: <String, String>{
