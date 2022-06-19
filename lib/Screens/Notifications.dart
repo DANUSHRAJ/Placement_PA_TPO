@@ -296,6 +296,8 @@ class _ThumbsUpButtonState extends State<ThumbsUpButton> {
     NotificationApi api = NotificationApi();
     if ((heading.value.text).isNotEmpty && (message.value.text).isNotEmpty) {
       List<String> result = await api.getTokenIdByBatch("2023");
+      print("Result");
+      print(result);
       await sendNotification(result, heading.value.text, message.value.text);
     } else {
       Fluttertoast.showToast(
@@ -311,21 +313,8 @@ class _ThumbsUpButtonState extends State<ThumbsUpButton> {
 
   Future<void> sendNotification(
       List<String?> tokenIdList, String heading, String contents) async {
-    print("Notification Success!");
-    Fluttertoast.showToast(
-        backgroundColor: Colors.amberAccent,
-        msg: "Notification sent successfully!",
-        textColor: Colors.black, // message
-        toastLength: Toast.LENGTH_SHORT, // length
-        gravity: ToastGravity.SNACKBAR, // location
-        timeInSecForIosWeb: 1 // duration
-        );
-
-    String result = "";
     NotificationApi api = NotificationApi();
-    await api
-        .storeNotification(heading, contents, "2023")
-        .then((value) => {result = value});
+    await api.storeNotification(heading, contents, "2023");
     await post(
       Uri.parse('https://onesignal.com/api/v1/notifications'),
       headers: <String, String>{
@@ -349,5 +338,15 @@ class _ThumbsUpButtonState extends State<ThumbsUpButton> {
         "contents": {"en": contents},
       }),
     );
+    print("Notification Success!");
+    Fluttertoast.showToast(
+        backgroundColor: Colors.amberAccent,
+        msg: "Notification sent successfully!",
+        textColor: Colors.black, // message
+        toastLength: Toast.LENGTH_SHORT, // length
+        gravity: ToastGravity.SNACKBAR, // location
+        timeInSecForIosWeb: 1 // duration
+        );
+
   }
 }
