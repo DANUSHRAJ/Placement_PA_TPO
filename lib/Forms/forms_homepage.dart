@@ -22,6 +22,7 @@ class _FormHomeState extends State<FormHome> {
   Widget build(BuildContext context) {
     //var size = MediaQuery.of(context).size;
     return Scaffold(
+        backgroundColor: Colors.blueGrey.shade900,
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           title: Text(
@@ -34,7 +35,7 @@ class _FormHomeState extends State<FormHome> {
           ),
           centerTitle: true,
           leading: _backButton(),
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.black45,
           elevation: 0,
         ),
         body: SafeArea(
@@ -44,12 +45,12 @@ class _FormHomeState extends State<FormHome> {
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             child: Stack(children: <Widget>[
-              Container(
-                decoration: const BoxDecoration(
-                    image: const DecorationImage(
-                        image: AssetImage('assets/images/Bg.jpeg'),
-                        fit: BoxFit.cover)),
-              ),
+              // Container(
+              //   decoration: const BoxDecoration(
+              //       image: const DecorationImage(
+              //           image: AssetImage('assets/images/Bg.jpeg'),
+              //           fit: BoxFit.cover)),
+              // ),
               SingleChildScrollView(
                 child: Center(
                   child: Column(
@@ -257,8 +258,10 @@ class SplashButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      //shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+      color: Colors.transparent,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
       child: InkWell(
+        borderRadius: BorderRadius.circular(25),
         onTap: onPressed,
         splashColor: Colors.purpleAccent,
         child: Container(
@@ -267,11 +270,16 @@ class SplashButton extends StatelessWidget {
           // padding: const EdgeInsets.all(25.0),
 
           decoration: const BoxDecoration(
-            color: Colors.transparent,
-            backgroundBlendMode: BlendMode.softLight,
-            image: DecorationImage(
-                image: const AssetImage('assets/images/FcCards.gif'),
-                fit: BoxFit.cover),
+            gradient: const LinearGradient(
+                colors: [Colors.amberAccent, Colors.purpleAccent, Colors.cyan]),
+            // color: Colors.black,
+            borderRadius: BorderRadius.all(
+              Radius.circular(55),
+            ),
+            // image: DecorationImage(
+            //     opacity: 0.8,
+            //     image: const AssetImage('assets/images/login.gif'),
+            //     fit: BoxFit.cover),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -281,7 +289,7 @@ class SplashButton extends StatelessWidget {
                 title,
                 style: GoogleFonts.adventPro(
                     fontSize: 28,
-                    color: Colors.white,
+                    color: Colors.black,
                     fontWeight: FontWeight.bold),
               ),
               // Text(

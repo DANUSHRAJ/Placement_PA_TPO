@@ -64,6 +64,7 @@ class _CreateFormState extends State<CreateForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blueGrey.shade900,
       appBar: AppBar(
         title: Text(
           "$title",
@@ -92,9 +93,9 @@ class _CreateFormState extends State<CreateForm> {
         ],
       ),
       body: Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('assets/images/Bg.jpeg'), fit: BoxFit.cover)),
+        // decoration: BoxDecoration(
+        //     image: DecorationImage(
+        //         image: AssetImage('assets/images/Bg.jpeg'), fit: BoxFit.cover)),
         child: Center(
           child: Column(
             children: [

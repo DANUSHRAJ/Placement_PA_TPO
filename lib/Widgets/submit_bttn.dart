@@ -74,7 +74,8 @@ class _SubmitBttnState extends State<SubmitBttn> {
         onTap: () async {
           //await changeToggle();
           await generateNotification();
-
+          //HomePage
+          //HomeScreen
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => HomeScreen()));
         },

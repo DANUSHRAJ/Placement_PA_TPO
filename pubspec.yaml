@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.15.1 <3.0.0"
+  sdk: ">=2.13.3 <3.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -43,15 +43,15 @@ dependencies:
   syncfusion_flutter_charts: ^19.4.48
   fl_chart: ^0.41.0
   flutter_zoom_drawer: ^2.3.0
-  webview_flutter: ^3.0.0
+  #webview_flutter: ^3.0.0
   footer: ^0.0.4
   unicorndial: ^1.1.5
   flutter_neumorphic: ^3.2.0
-  simple_animations: ^4.0.1
+  #simple_animations: ^4.0.1
   supercharged: ^2.1.1
   cell_calendar: ^0.5.0+1
   example: ^0.0.1
-  google_sign_in: ^5.2.4
+  #google_sign_in: ^5.2.4
   syncfusion_flutter_calendar: ^19.4.53
   googleapis: ^8.1.0
 
@@ -61,8 +61,14 @@ dependencies:
   flutter_easyloading: ^3.0.3
   fluttertoast: ^8.0.9
   onesignal_flutter: ^3.2.8
-  http: ^0.13.4
+  
   flutter_advanced_switch: ^3.0.0+1
+  decorated_dropdownbutton: ^0.0.3
+  direct_select: ^2.0.0
+  simple_animations: ^4.0.0
+  draggable_home: ^1.0.3
+  slide_digital_clock: 
+  #animated_rail: any
   #xlive_switch: ^1.0.5
  
   
@@ -106,6 +112,7 @@ flutter:
     - assets/images/FcCards.gif
     - assets/images/loading.json
     - assets/images/loading1.json
+    - assets/images/ready-set-go.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

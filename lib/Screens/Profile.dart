@@ -73,6 +73,7 @@ class _ProfileHomeState extends State<ProfileHome> {
   Widget build(BuildContext context) {
     return Scaffold(
         extendBodyBehindAppBar: true,
+        backgroundColor: Colors.blueGrey.shade900,
         appBar: AppBar(
           title: Text(
             "PROFILE",
@@ -84,17 +85,17 @@ class _ProfileHomeState extends State<ProfileHome> {
           ),
           centerTitle: true,
           leading: _backButton(),
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.blueGrey.shade900,
         ),
         body: SafeArea(
             child: Container(
                 child: Stack(children: [
-          Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('assets/images/Bg.jpeg'),
-                    fit: BoxFit.cover)),
-          ),
+          // Container(
+          //   decoration: BoxDecoration(
+          //       image: DecorationImage(
+          //           image: AssetImage('assets/images/Bg.jpeg'),
+          //           fit: BoxFit.cover)),
+          // ),
           Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,

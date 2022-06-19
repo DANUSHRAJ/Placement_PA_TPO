@@ -1,8 +1,9 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:admin_sjit_pp/Screens/History.dart';
 import 'package:admin_sjit_pp/Screens/Profile.dart';
+import 'package:draggable_home/draggable_home.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,12 +13,12 @@ import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:slide_digital_clock/slide_digital_clock.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'API/toggle.api.dart';
 import 'Forms/forms_homepage.dart';
 import 'Screens/Intership.dart';
 import 'Screens/Notifications.dart';
-import 'Widgets/webview.dart';
 import 'dart:math' as math;
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 
@@ -38,6 +39,168 @@ class _HomeScreenState extends State<HomeScreen> {
   int switch3 = 0;
   int switch4 = 0;
   int switch5 = 0;
+
+  ListView listView() {
+    return ListView.builder(
+      padding: const EdgeInsets.only(top: 0),
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: 1,
+      shrinkWrap: true,
+      itemBuilder: (context, index) => Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          //  SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Toggle Menu',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.adventPro(
+                    fontSize: 20,
+                    color: Colors.orange,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              CardFb1(
+                  text: "PROFILE",
+                  cardname: "profile",
+                  status: switch1,
+                  imageUrl:
+                      "https://assets7.lottiefiles.com/private_files/lf30_LOw4AL.json",
+                  subtitle: "__ __",
+                  onPressed: () {}),
+              CardFb1(
+                  text: "INTERNSHIPS",
+                  cardname: "interns",
+                  status: switch2,
+                  imageUrl:
+                      "https://assets3.lottiefiles.com/packages/lf20_m0ze3ipv.json",
+                  subtitle: "__ ___",
+                  onPressed: () {}),
+            ],
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              CardFb1(
+                  text: "WORKSHOPS",
+                  cardname: "workshop",
+                  status: switch3,
+                  imageUrl:
+                      "https://assets7.lottiefiles.com/private_files/lf30_LOw4AL.json",
+                  subtitle: "__ __",
+                  onPressed: () {}),
+              CardFb1(
+                  text: "COURSES",
+                  cardname: "course",
+                  status: switch4,
+                  imageUrl:
+                      "https://assets7.lottiefiles.com/private_files/lf30_LOw4AL.json",
+                  subtitle: "__ __",
+                  onPressed: () {}),
+            ],
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              CardFb1(
+                  text: "PLACEMENTS",
+                  cardname: "placements",
+                  status: switch5,
+                  imageUrl:
+                      "https://assets7.lottiefiles.com/private_files/lf30_LOw4AL.json",
+                  subtitle: "__ __",
+                  onPressed: () {}),
+            ],
+          ),
+          // SizedBox(
+          //   height: 20,
+          // ),
+        ],
+      ),
+    );
+  }
+
+  Row headerBottomBarWidget() {
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: const [
+        Icon(
+          Icons.settings,
+          color: Colors.white,
+        ),
+      ],
+    );
+  }
+
+  Widget headerWidget(BuildContext context) {
+    return Container(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 30,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                IconButton(
+                  icon: const Icon(
+                    Icons.menu,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        PageTransition(
+                            type: PageTransitionType.leftToRightWithFade,
+                            child: const ZoomDrawerTest()));
+                  },
+                ),
+                Text(
+                  'Welcome back, ',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.adventPro(
+                      color: Colors.orange,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  ' Admin',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.adventPro(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            PromoCard(),
+          ],
+        ),
+      ),
+    );
+  }
 
   Future<void> __updatestatus(String cardname, int value) async {
     ToggleApi api = ToggleApi();
@@ -85,171 +248,115 @@ class _HomeScreenState extends State<HomeScreen> {
       body: loading
           ? Center(child: Lottie.asset('assets/images/loading1.json'))
           : Center(
-              child: Stack(
-                children: [
-                  Container(
-                    height: MediaQuery.of(context).size.height,
-                    width: MediaQuery.of(context).size.width,
-                    // decoration: const BoxDecoration(
-                    //     gradient: LinearGradient(
-                    //   begin: Alignment.topRight,
-                    //   end: Alignment.bottomLeft,
-                    //   colors: [Colors.black, Colors.blueGrey, Colors.black],
-                    // )),
-                    child: Align(
-                      alignment: Alignment.topLeft,
-                      child: Stack(children: <Widget>[
-                        Container(
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage('assets/images/Bg.jpeg'),
-                                  fit: BoxFit.cover)),
-                        ),
-                        Divider(
-                            height: height * .3,
-                            thickness: 5,
-                            indent: 5,
-                            endIndent: 5,
-                            color: Colors.orange.withOpacity(.5)),
+              child: DraggableHome(
+                appBarColor: Colors.blueGrey.shade900,
+                title: Text(
+                  'HOMEPAGE ',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.adventPro(
+                      color: Colors.orange,
+                      fontSize: 27,
+                      fontWeight: FontWeight.bold),
+                ),
+                headerWidget: headerWidget(context),
 
-                        SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              SizedBox(height: height * .2),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    'Toggle Menu',
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.adventPro(
-                                        fontSize: 20,
-                                        color: Colors.orange,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  CardFb1(
-                                      text: "PROFILE",
-                                      cardname: "profile",
-                                      status: switch1,
-                                      imageUrl:
-                                          "https://assets7.lottiefiles.com/private_files/lf30_LOw4AL.json",
-                                      subtitle: "__ __",
-                                      onPressed: () {}),
-                                  CardFb1(
-                                      text: "INTERNSHIPS",
-                                      cardname: "interns",
-                                      status: switch2,
-                                      imageUrl:
-                                          "https://assets3.lottiefiles.com/packages/lf20_m0ze3ipv.json",
-                                      subtitle: "__ ___",
-                                      onPressed: () {}),
-                                ],
-                              ),
-                              SizedBox(
-                                height: height * .05,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  CardFb1(
-                                      text: "WORKSHOPS",
-                                      cardname: "workshop",
-                                      status: switch3,
-                                      imageUrl:
-                                          "https://assets7.lottiefiles.com/private_files/lf30_LOw4AL.json",
-                                      subtitle: "__ __",
-                                      onPressed: () {}),
-                                  CardFb1(
-                                      text: "COURSES",
-                                      cardname: "course",
-                                      status: switch4,
-                                      imageUrl:
-                                          "https://assets7.lottiefiles.com/private_files/lf30_LOw4AL.json",
-                                      subtitle: "__ __",
-                                      onPressed: () {}),
-                                ],
-                              ),
-                              SizedBox(
-                                height: height * .05,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  CardFb1(
-                                      text: "PLACEMENTS",
-                                      cardname: "placements",
-                                      status: switch5,
-                                      imageUrl:
-                                          "https://assets7.lottiefiles.com/private_files/lf30_LOw4AL.json",
-                                      subtitle: "__ __",
-                                      onPressed: () {}),
-                                ],
-                              ),
-                              SizedBox(
-                                height: height * .2,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            // crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              SizedBox(
-                                height: height * .2,
-                              ),
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.menu,
-                                  color: Colors.white,
-                                ),
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      PageTransition(
-                                          type: PageTransitionType
-                                              .leftToRightWithFade,
-                                          child: const ZoomDrawerTest()));
-                                },
-                              ),
-                              Text(
-                                'Welcome back, ',
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.adventPro(
-                                  color: Colors.orange,
-                                  fontSize: 17,
-                                ),
-                              ),
-                              Text(
-                                ' Admin',
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.adventPro(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                        ),
-                        // const Align(
-                        //   alignment: Alignment.bottomCenter,
-                        //   child: const BottomNavBarCurvedFb1(),
-                        // ),
-                        //SwitchScreen(),
-                      ]),
-                    ),
-                  ),
+                body: [
+                  listView()
+                  // Container(
+                  //   decoration: BoxDecoration(
+                  //       image: DecorationImage(
+                  //           image: AssetImage('assets/images/Bg.jpeg'),
+                  //           fit: BoxFit.cover)),
+                  // ),
+                  // Column(
+                  //   mainAxisSize: MainAxisSize.min,
+                  //   children: [
+                  //     SizedBox(height: height * .2),
+                  //     Padding(
+                  //       padding: const EdgeInsets.all(8.0),
+                  //       child: Align(
+                  //         alignment: Alignment.centerLeft,
+                  //         child: Text(
+                  //           'Toggle Menu',
+                  //           textAlign: TextAlign.center,
+                  //           style: GoogleFonts.adventPro(
+                  //               fontSize: 20,
+                  //               color: Colors.orange,
+                  //               fontWeight: FontWeight.bold),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     Row(
+                  //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //       children: [
+                  //         CardFb1(
+                  //             text: "PROFILE",
+                  //             cardname: "profile",
+                  //             status: switch1,
+                  //             imageUrl:
+                  //                 "https://assets7.lottiefiles.com/private_files/lf30_LOw4AL.json",
+                  //             subtitle: "__ __",
+                  //             onPressed: () {}),
+                  //         CardFb1(
+                  //             text: "INTERNSHIPS",
+                  //             cardname: "interns",
+                  //             status: switch2,
+                  //             imageUrl:
+                  //                 "https://assets3.lottiefiles.com/packages/lf20_m0ze3ipv.json",
+                  //             subtitle: "__ ___",
+                  //             onPressed: () {}),
+                  //       ],
+                  //     ),
+                  //     SizedBox(
+                  //       height: height * .05,
+                  //     ),
+                  //     Row(
+                  //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //       children: [
+                  //         CardFb1(
+                  //             text: "WORKSHOPS",
+                  //             cardname: "workshop",
+                  //             status: switch3,
+                  //             imageUrl:
+                  //                 "https://assets7.lottiefiles.com/private_files/lf30_LOw4AL.json",
+                  //             subtitle: "__ __",
+                  //             onPressed: () {}),
+                  //         CardFb1(
+                  //             text: "COURSES",
+                  //             cardname: "course",
+                  //             status: switch4,
+                  //             imageUrl:
+                  //                 "https://assets7.lottiefiles.com/private_files/lf30_LOw4AL.json",
+                  //             subtitle: "__ __",
+                  //             onPressed: () {}),
+                  //       ],
+                  //     ),
+                  //     SizedBox(
+                  //       height: height * .05,
+                  //     ),
+                  //     Row(
+                  //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //       children: [
+                  //         CardFb1(
+                  //             text: "PLACEMENTS",
+                  //             cardname: "placements",
+                  //             status: switch5,
+                  //             imageUrl:
+                  //                 "https://assets7.lottiefiles.com/private_files/lf30_LOw4AL.json",
+                  //             subtitle: "__ __",
+                  //             onPressed: () {}),
+                  //       ],
+                  //     ),
+                  //     SizedBox(
+                  //       height: height * .2,
+                  //     ),
+                  //   ],
+                  // ),
                 ],
+                //    fullyStretchable: true,
+                // expandedBody: const CameraPreview(),
+                backgroundColor: Colors.blueGrey.shade900,
+                // appBarColor: Colors.teal,
               ),
             ),
     );
@@ -324,13 +431,14 @@ class CardFb1 extends StatelessWidget {
       child: Container(
         width: 300 / 2,
         height: 300 / 2,
-        //padding: const EdgeInsets.all(5.0),
         decoration: BoxDecoration(
-          image: new DecorationImage(
-            image: new ExactAssetImage('assets/images/toggle_bg.jpg'),
-            fit: BoxFit.cover,
-          ),
-          color: Colors.black,
+          gradient: const LinearGradient(begin: Alignment.topLeft,
+              //end: Alignment.bottomLeft,
+              colors: [
+                Color.fromARGB(255, 154, 99, 164),
+                Color.fromARGB(255, 248, 127, 106),
+                Colors.cyan
+              ]),
           borderRadius: BorderRadius.circular(25.5),
           boxShadow: [
             BoxShadow(
@@ -383,8 +491,8 @@ class DrawerFb1 extends StatelessWidget {
               padding: const EdgeInsets.all(15.0),
               child: Column(children: [
                 const SizedBox(height: 12),
-                const SearchFieldDrawer(),
-                const SizedBox(height: 12),
+                // const SearchFieldDrawer(),
+                // const SizedBox(height: 12),
                 MenuItem(
                   text: 'Profile',
                   icon: Icons.people,
@@ -422,14 +530,39 @@ class DrawerFb1 extends StatelessWidget {
                 Align(
                   alignment: Alignment.bottomLeft,
                   child: MenuItem(
-                    text: 'Close',
-                    icon: Icons.close_rounded,
-                    onClicked: () => Navigator.push(
-                        context,
-                        PageTransition(
-                          type: PageTransitionType.leftToRightWithFade,
-                          child: HomeScreen(),
-                        )),
+                    text: 'Logout',
+                    icon: Icons.logout,
+                    onClicked: () => showCupertinoDialog(
+                        context: context,
+                        builder: (BuildContext ctx) {
+                          return CupertinoAlertDialog(
+                            title: const Text('Please Confirm'),
+                            content: const Text('Are you sure want to leave ?'),
+                            actions: [
+                              // The "Yes" button
+                              CupertinoDialogAction(
+                                onPressed: () {
+                                  setState(() {
+                                    // _isShown = false;
+                                    Navigator.of(context).pop();
+                                  });
+                                },
+                                child: const Text('Yes'),
+                                isDefaultAction: true,
+                                isDestructiveAction: true,
+                              ),
+                              // The "No" button
+                              CupertinoDialogAction(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('No'),
+                                isDefaultAction: false,
+                                isDestructiveAction: false,
+                              )
+                            ],
+                          );
+                        }),
                   ),
                 )
               ]),
@@ -451,11 +584,7 @@ class DrawerFb1 extends StatelessWidget {
       case 1:
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => const FormHome()));
-        // Navigator.of(context).push(MaterialPageRoute(
-        //     builder: (BuildContext context) => MyWebView(
-        //           title: "GoogleForms",
-        //           selectedUrl: "https://www.google.com/forms/about/",
-        //         )));
+
         break;
 
       case 5:
@@ -544,7 +673,7 @@ class _ZoomDrawerTestState extends State<ZoomDrawerTest> {
       //showShadow: true,
       angle: -15.0,
       backgroundColor: Colors.transparent,
-      slideWidth: MediaQuery.of(context).size.width * .65,
+      slideWidth: MediaQuery.of(context).size.width * .5,
       openCurve: Curves.easeIn,
       closeCurve: Curves.easeInOut,
     );
@@ -615,60 +744,6 @@ class _ToggleSwitchState extends State<ToggleSwitch> {
   }
 }
 
-//toggle switch
-
-// class Toggle extends StatefulWidget {
-//   final String cardname;
-
-//   Toggle({Key? key, required this.cardname}) : super(key: key);
-//   @override
-//   _ToggleState createState() => _ToggleState();
-// }
-
-// class _ToggleState extends State<Toggle> {
-//   bool isSwitched = false;
-
-//   Future<void> __updatestatus(String cardname, int value) async {
-//     ToggleApi api = ToggleApi();
-//     await api.toggleStatus(cardname, value);
-//     print("sucess");
-//   }
-
-//   Future<void> _getstatus(String cardname) async {
-//     ToggleApi api = ToggleApi();
-//     var result1 = await api.getCurrentToogleStatus(cardname);
-//     // print("Result1: " + result1);
-//     isSwitched = result1 == "1" ? true : false;
-//     build(context);
-//     // print("get success");
-//   }
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     _getstatus(widget.cardname);
-//   }
-
-//   // @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       child: Center(
-//         child: Switch(
-//           value: isSwitched,
-//           onChanged: (value) {
-//             setState(() {
-//               isSwitched = value;
-//               print(isSwitched);
-//             });
-//           },
-//           activeTrackColor: Colors.lightGreenAccent,
-//           activeColor: Colors.green,
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 // class Notification extends StatefulWidget {
 //   const Notification({Key? key}) : super(key: key);
 
@@ -682,3 +757,181 @@ class _ToggleSwitchState extends State<ToggleSwitch> {
 //     return Container();
 //   }
 // }
+
+// class HomePage extends StatelessWidget {
+//   const HomePage({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return DraggableHome(
+//       leading: const Icon(Icons.arrow_back_ios),
+//       title: const Text("Draggable Home"),
+//       actions: [
+//         IconButton(onPressed: () {}, icon: const Icon(Icons.settings)),
+//       ],
+//       headerWidget: headerWidget(context),
+//       headerBottomBar: headerBottomBarWidget(),
+//       body: [
+//         listView(),
+//       ],
+//       fullyStretchable: true,
+//       // expandedBody: const CameraPreview(),
+//       backgroundColor: Colors.white,
+//       appBarColor: Colors.teal,
+//     );
+//   }
+
+//   Row headerBottomBarWidget() {
+//     return Row(
+//       mainAxisSize: MainAxisSize.max,
+//       mainAxisAlignment: MainAxisAlignment.end,
+//       crossAxisAlignment: CrossAxisAlignment.center,
+//       children: const [
+//         Icon(
+//           Icons.settings,
+//           color: Colors.white,
+//         ),
+//       ],
+//     );
+//   }
+
+//   Widget headerWidget(BuildContext context) {
+//     return Container(
+//       child: Row(
+//         mainAxisAlignment: MainAxisAlignment.start,
+//         // crossAxisAlignment: CrossAxisAlignment.end,
+//         children: [
+//           // SizedBox(
+//           //   height: height * .2,
+//           // ),
+//           IconButton(
+//             icon: const Icon(
+//               Icons.menu,
+//               color: Colors.white,
+//             ),
+//             onPressed: () {
+//               Navigator.push(
+//                   context,
+//                   PageTransition(
+//                       type: PageTransitionType.leftToRightWithFade,
+//                       child: const ZoomDrawerTest()));
+//             },
+//           ),
+//           Text(
+//             'Welcome back, ',
+//             textAlign: TextAlign.center,
+//             style: GoogleFonts.adventPro(
+//               color: Colors.orange,
+//               fontSize: 17,
+//             ),
+//           ),
+//           Text(
+//             ' Admin',
+//             textAlign: TextAlign.center,
+//             style: GoogleFonts.adventPro(
+//                 color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+
+//   ListView listView() {
+//     return ListView.builder(
+//       padding: const EdgeInsets.only(top: 0),
+//       physics: const NeverScrollableScrollPhysics(),
+//       itemCount: 20,
+//       shrinkWrap: true,
+//       itemBuilder: (context, index) => Card(
+//         color: Colors.white70,
+//         child: ListTile(
+//           leading: CircleAvatar(
+//             child: Text("$index"),
+//           ),
+//           title: const Text("Title"),
+//           subtitle: const Text("Subtitile"),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+class PromoCard extends StatelessWidget {
+  const PromoCard({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 150,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          gradient: const LinearGradient(
+              colors: [Colors.amberAccent, Colors.purpleAccent, Colors.cyan])),
+      child: Stack(
+        children: [
+          Opacity(
+            opacity: .5,
+            child: Align(
+                alignment: Alignment.bottomRight,
+                child:
+                    Image.asset("assets/images/one.png", fit: BoxFit.fitWidth)),
+          ),
+          Opacity(
+            opacity: .5,
+            child: Align(
+                alignment: Alignment.center,
+                child:
+                    Image.asset("assets/images/one.png", fit: BoxFit.fitWidth)),
+          ),
+          Opacity(
+            opacity: .5,
+            child: Align(
+                alignment: Alignment.centerLeft,
+                child:
+                    Image.asset("assets/images/one.png", fit: BoxFit.fitWidth)),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    "St.Joseph's Institute Of Technology",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: DigitalClock(
+                    digitAnimationStyle: Curves.elasticOut,
+                    is24HourTimeFormat: false,
+                    areaDecoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        gradient: const LinearGradient(colors: [
+                          Colors.amberAccent,
+                          Colors.purpleAccent,
+                          Colors.cyan
+                        ])),
+                    hourMinuteDigitTextStyle: TextStyle(
+                      color: Colors.black,
+                      fontSize: 35,
+                    ),
+                    amPmDigitTextStyle: TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

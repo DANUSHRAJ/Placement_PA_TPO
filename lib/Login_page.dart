@@ -47,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-        backgroundColor: Color.fromRGBO(30, 9, 23, 1),
+        backgroundColor: Colors.blueGrey.shade900,
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           title: Text(
@@ -76,12 +76,12 @@ class _LoginPageState extends State<LoginPage> {
             //     // ),
             //     ),
             child: Stack(children: <Widget>[
-              Container(
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage('assets/images/Bg.jpeg'),
-                        fit: BoxFit.cover)),
-              ),
+              // Container(
+              //   decoration: BoxDecoration(
+              //       image: DecorationImage(
+              //           image: AssetImage('assets/images/Bg.jpeg'),
+              //           fit: BoxFit.cover)),
+              // ),
               SingleChildScrollView(
                 child: Container(
                   padding: EdgeInsets.all(25.0),

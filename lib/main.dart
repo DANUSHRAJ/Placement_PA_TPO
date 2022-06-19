@@ -53,7 +53,7 @@ class SplashScreenState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromRGBO(30, 9, 23, 1),
+        backgroundColor: Colors.blueGrey.shade900,
         body: Container(
             height: double.infinity,
             //width: MediaQuery.of(context).size.width,
@@ -105,12 +105,12 @@ class SplashScreenState extends State<MyHomePage> {
                 //       )),
                 // ),
 
-                Container(
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage('assets/images/Bg.jpeg'),
-                          fit: BoxFit.cover)),
-                ),
+                // Container(
+                //   decoration: BoxDecoration(
+                //       image: DecorationImage(
+                //           image: AssetImage('assets/images/Bg.jpeg'),
+                //           fit: BoxFit.cover)),
+                // ),
                 Align(
                     alignment: Alignment.bottomCenter,
                     child: Lottie.asset("assets/images/landing.json",

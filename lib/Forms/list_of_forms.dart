@@ -38,6 +38,7 @@ class _FormListState extends State<FormList> {
   Widget build(BuildContext context) {
     return Scaffold(
         extendBodyBehindAppBar: true,
+        backgroundColor: Colors.blueGrey.shade900,
         appBar: AppBar(
           title: Text(
             "FORM LIST",
@@ -49,7 +50,7 @@ class _FormListState extends State<FormList> {
           ),
           centerTitle: true,
           leading: _backButton(),
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.black38,
           elevation: 0,
         ),
         body: SafeArea(
@@ -59,12 +60,12 @@ class _FormListState extends State<FormList> {
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               child: Stack(children: <Widget>[
-                Container(
-                  decoration: const BoxDecoration(
-                      image: const DecorationImage(
-                          image: AssetImage('assets/images/Bg.jpeg'),
-                          fit: BoxFit.cover)),
-                ),
+                // Container(
+                //   decoration: const BoxDecoration(
+                //       image: const DecorationImage(
+                //           image: AssetImage('assets/images/Bg.jpeg'),
+                //           fit: BoxFit.cover)),
+                // ),
                 SingleChildScrollView(
                   child: Center(
                     child: Column(

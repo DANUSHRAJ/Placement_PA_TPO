@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'package:intl/intl.dart';
 
 import 'package:admin_sjit_pp/API/forms.api.dart';
 import 'package:admin_sjit_pp/API/notification.api.dart';
+import 'package:direct_select/direct_select.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,11 +22,29 @@ class Notifications extends StatefulWidget {
 }
 
 class _NotificationsState extends State<Notifications> {
+  final elements1 = [];
+
+  int selectedIndex1 = 0;
+
+  List<Widget> _buildItems1() {
+    return elements1
+        .map((val) => MySelectionItem(
+              title: val,
+            ))
+        .toList();
+  }
+
   @override
   Widget build(BuildContext context) {
+    var Now = DateTime.now().year;
+    if (elements1.length == 0) {
+      for (var i = Now - 6; i < Now + 6; i++) {
+        elements1.add(i.toString());
+      }
+    }
     return Scaffold(
       extendBodyBehindAppBar: true,
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.blueGrey.shade900,
       // Color.fromRGBO(30, 9, 23, 1),
       appBar: AppBar(
         title: Text(
@@ -41,7 +61,7 @@ class _NotificationsState extends State<Notifications> {
           ThumbsUpButton(onPressed: () {}, color: Colors.orange),
         ],
 
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.black38,
         // Color.fromRGBO(30, 9, 23, 1),
         elevation: 0,
       ),
@@ -49,25 +69,64 @@ class _NotificationsState extends State<Notifications> {
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                SizedBox(height: 150),
-                Align(
-                    alignment: Alignment.center,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: EmailInputFb3(
-                          inputController: heading, val: "Heading"),
-                    )),
-                SizedBox(height: 50),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child:
-                      EmailInputFb2(inputController: message, val: "Message"),
-                ),
-                //  EmailInputFb1(),
-                // ThumbsUpButton(onPressed: () {}, color: Colors.orange),
-              ],
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  SizedBox(height: 150),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Batch",
+                        textAlign: TextAlign.justify,
+                        style: GoogleFonts.adventPro(
+                            fontSize: 15,
+                            color: Colors.orangeAccent,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: DirectSelect(
+                            mode: DirectSelectMode.tap,
+                            itemExtent: 55.0,
+                            selectedIndex: selectedIndex1,
+                            child: MySelectionItem(
+                              isForList: false,
+                              title: elements1[selectedIndex1],
+                            ),
+                            onSelectedItemChanged: (index) {
+                              setState(() {
+                                selectedIndex1 = index!;
+                              });
+                            },
+                            items: _buildItems1()),
+                      ),
+                    ],
+                  ),
+                  //  SizedBox(height: 150),
+                  Align(
+                      alignment: Alignment.center,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: EmailInputFb3(
+                            inputController: heading, val: "Heading"),
+                      )),
+                  SizedBox(height: 50),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child:
+                        EmailInputFb2(inputController: message, val: "Message"),
+                  ),
+                  //  EmailInputFb1(),
+                  // ThumbsUpButton(onPressed: () {}, color: Colors.orange),
+                ],
+              ),
             ),
           )),
     );
@@ -295,7 +354,7 @@ class _ThumbsUpButtonState extends State<ThumbsUpButton> {
   fetchDetails() async {
     NotificationApi api = NotificationApi();
     if ((heading.value.text).isNotEmpty && (message.value.text).isNotEmpty) {
-      List<String> result = await api.getTokenIdByBatch("2023");
+      List<String> result = await api.getTokenIdByBatch(batch);
       print("Result");
       print(result);
       await sendNotification(result, heading.value.text, message.value.text);
@@ -311,10 +370,12 @@ class _ThumbsUpButtonState extends State<ThumbsUpButton> {
     }
   }
 
+  var batch = "";
+
   Future<void> sendNotification(
       List<String?> tokenIdList, String heading, String contents) async {
     NotificationApi api = NotificationApi();
-    await api.storeNotification(heading, contents, "2023");
+    await api.storeNotification(heading, contents, batch);
     await post(
       Uri.parse('https://onesignal.com/api/v1/notifications'),
       headers: <String, String>{
@@ -347,5 +408,55 @@ class _ThumbsUpButtonState extends State<ThumbsUpButton> {
         gravity: ToastGravity.SNACKBAR, // location
         timeInSecForIosWeb: 1 // duration
         );
+  }
+}
+
+class MySelectionItem extends StatelessWidget {
+  final String title;
+  final bool isForList;
+
+  const MySelectionItem({Key? key, required this.title, this.isForList = true})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var batch = title;
+    print(batch);
+    return SizedBox(
+      height: 40.0,
+      width: 110.0,
+      child: isForList
+          ? Padding(
+              child: _buildItem(context),
+              padding: EdgeInsets.all(10.0),
+            )
+          : Card(
+              child: Stack(
+                children: <Widget>[
+                  _buildItem(context),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Icon(Icons.arrow_drop_down),
+                  )
+                ],
+              ),
+            ),
+    );
+  }
+
+  _buildItem(BuildContext context) {
+    return Container(
+      //color: Colors.amberAccent,
+
+      width: MediaQuery.of(context).size.width,
+      alignment: Alignment.center,
+      child: Text(
+        title,
+        textAlign: TextAlign.justify,
+        style: GoogleFonts.adventPro(
+            fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
+      ),
+      // Text(title),
+    );
   }
 }
