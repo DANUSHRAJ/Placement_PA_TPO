@@ -81,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: loading
-          ? Center(child: Lottie.asset('assets/images/landing1.json'))
+          ? Center(child: Lottie.asset('assets/images/loading1.json'))
           : Center(
               child: Stack(
                 children: [
