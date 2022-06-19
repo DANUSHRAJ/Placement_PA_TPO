@@ -28,6 +28,9 @@ server_router.get("/dwnData", service.dwnData);
 //http://localhost:8080/getTokenIdByBatchNew
 server_router.post("/getTokenIdByBatchNew", service.getTokenIdByBatchNew);
 
+//http://localhost:8080/storeNotification
+server_router.post("/storeNotification", service.storeNotification);
+
 //http://localhost:8080/getaccounts
 server_router.get("/getaccounts", service.getaccounts);
 

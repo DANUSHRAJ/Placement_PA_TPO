@@ -300,6 +300,9 @@ class _ThumbsUpButtonState extends State<ThumbsUpButton> {
   Future<void> sendNotification(
       List<String?> tokenIdList, String heading, String contents) async {
     print("Notification Success!");
+    NotificationApi api = NotificationApi();
+    String result = "";
+    await api.storeNotification(heading, contents, "2023").then((value)=>{result=value});
     await post(
       Uri.parse('https://onesignal.com/api/v1/notifications'),
       headers: <String, String>{

@@ -134,6 +134,16 @@ module.exports.getTokenIdByBatchNew = async (req, res) => {
         console.log(err);
     }
 };
+
+module.exports.storeNotification = async (req, res) => {
+    try {
+        const result = await client.db("Cluster0").collection("notification").insertOne(req.body);
+        res.send("Success");
+    } catch (err) {
+        console.log(err);
+    }
+};
+
 module.exports.getaccounts = async (req, res) => {
     try {
         const result = await client.db("Cluster0").collection("accounts").find();
