@@ -31,8 +31,6 @@ class HomeScreen extends StatefulWidget {
 bool loading = false;
 
 class _HomeScreenState extends State<HomeScreen> {
-
-
   int isSwitched = 0;
   int switch1 = 0;
   int switch2 = 0;
@@ -48,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<int> _getstatus(String cardname) async {
     ToggleApi api = ToggleApi();
-    var result1 = await api.getCurrentToogleStatus(cardname).then((value){
+    var result1 = await api.getCurrentToogleStatus(cardname).then((value) {
       isSwitched = value == "1" ? 1 : 0;
       // print("sucess");
       // print(isSwitched);
@@ -57,11 +55,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _getAllStatus() async {
-      switch1 = await _getstatus("profile");
-      switch2 = await _getstatus("interns");
-      switch3 = await _getstatus("workshop");
-      switch4 = await _getstatus("course");
-      switch5 = await _getstatus("placements");
+    switch1 = await _getstatus("profile");
+    switch2 = await _getstatus("interns");
+    switch3 = await _getstatus("workshop");
+    switch4 = await _getstatus("course");
+    switch5 = await _getstatus("placements");
   }
 
   @override
@@ -558,7 +556,8 @@ class ToggleSwitch extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<ToggleSwitch> createState() => _ToggleSwitchState(cardname: cardname, status: status);
+  State<ToggleSwitch> createState() =>
+      _ToggleSwitchState(cardname: cardname, status: status);
 }
 
 class _ToggleSwitchState extends State<ToggleSwitch> {
