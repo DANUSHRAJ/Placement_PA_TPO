@@ -29,6 +29,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 bool loading = false;
+bool success = false;
 
 class _HomeScreenState extends State<HomeScreen> {
   int isSwitched = 0;
@@ -67,8 +68,9 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     loading = true;
     _getAllStatus();
-    Future.delayed(const Duration(milliseconds: 10000), () {
+    Future.delayed(const Duration(milliseconds: 6000), () {
       print("Time Over");
+      print(success);
       loading = false;
       (context as Element).reassemble();
     });
@@ -579,27 +581,25 @@ class _ToggleSwitchState extends State<ToggleSwitch> {
   @override
   void initState() {
     super.initState();
-    if (status == 0)
-      _controller01 = ValueNotifier<bool>(false);
-    else
-      _controller01 = ValueNotifier<bool>(true);
+    _controller01 =
+        status == 0 ? ValueNotifier<bool>(false) : ValueNotifier<bool>(true);
 
-    // _controller01.addListener(() {
-    //   setState(() {
-    //     if (_controller01.value) {
-    //       _themeDark = true;
-    //     } else {
-    //       _themeDark = false;
-    //     }
-    //   });
-    // });
+    _controller01.addListener(() {
+      setState(() {
+        if (_controller01.value) {
+          success = true;
+        } else {
+          success = false;
+        }
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Row(
-        mainAxisSize: MainAxisSize.max,
+        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           AdvancedSwitch(
