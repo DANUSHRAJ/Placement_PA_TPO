@@ -150,8 +150,8 @@ class EmailInputFb2 extends StatelessWidget {
               maxLength: 100000,
               style: const TextStyle(fontSize: 15, color: Colors.black),
               decoration: InputDecoration(
-                label: const Text("Message"),
-                labelStyle: const TextStyle(color: primaryColor),
+                // label: const Text("Message"),
+                // labelStyle: const TextStyle(color: primaryColor),
                 // prefixIcon: Icon(Icons.email),
                 filled: true,
                 fillColor: accentColor,
@@ -231,8 +231,8 @@ class EmailInputFb3 extends StatelessWidget {
             keyboardType: TextInputType.emailAddress,
             style: const TextStyle(fontSize: 14, color: Colors.black),
             decoration: InputDecoration(
-              label: const Text("Heading"),
-              labelStyle: const TextStyle(color: primaryColor),
+              // label: const Text("Heading"),
+              // labelStyle: const TextStyle(color: primaryColor),
               // prefixIcon: Icon(Icons.email),
               filled: true,
               fillColor: accentColor,
@@ -347,6 +347,5 @@ class _ThumbsUpButtonState extends State<ThumbsUpButton> {
         gravity: ToastGravity.SNACKBAR, // location
         timeInSecForIosWeb: 1 // duration
         );
-
   }
 }
