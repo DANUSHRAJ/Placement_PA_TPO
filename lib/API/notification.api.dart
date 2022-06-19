@@ -21,10 +21,15 @@ class NotificationApi {
     return reslist;
   }
 
-  Future<String> storeNotification(String heading, String message, String batch) async {
+  Future<String> storeNotification(
+      String heading, String message, String batch) async {
     print("Success");
-      final response = await _dio.post('/storeNotification',
-          data: {"heading": heading, "message": message, "batch": batch,"is_active":"true"});
-      return "Success";
+    final response = await _dio.post('/storeNotification', data: {
+      "heading": heading,
+      "message": message,
+      "batch": batch,
+      "isActive": "true"
+    });
+    return "Success";
   }
 }
