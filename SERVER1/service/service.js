@@ -135,6 +135,8 @@ module.exports.getTokenIdByBatchNew = async (req, res) => {
     }
 };
 
+//http://localhost:8080/    kjnrfgkjdfnkjergkjdkj
+
 module.exports.storeNotification = async (req, res) => {
     try {
         const result = await client.db("Cluster0").collection("notification").insertOne(req.body);
