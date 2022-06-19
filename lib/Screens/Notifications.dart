@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:admin_sjit_pp/API/forms.api.dart';
 import 'package:admin_sjit_pp/API/notification.api.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
 
@@ -280,12 +281,12 @@ class _ThumbsUpButtonState extends State<ThumbsUpButton> {
   Widget build(BuildContext context) {
     return Container(
         child: IconButton(
-      icon: Icon(isLiked ? Icons.thumb_up_alt_outlined : Icons.send,
-          color: widget.color),
+      icon: Icon(Icons.send, color: widget.color),
       onPressed: () {
         fetchDetails();
         setState(() {
           isLiked = !isLiked;
+          isLiked = true;
         });
       },
     ));
@@ -293,13 +294,38 @@ class _ThumbsUpButtonState extends State<ThumbsUpButton> {
 
   fetchDetails() async {
     NotificationApi api = NotificationApi();
-    List<String> result = await api.getTokenIdByBatch("2023");
-    await sendNotification(result, heading.value.text, message.value.text);
+    if ((heading.value.text).isNotEmpty && (message.value.text).isNotEmpty) {
+      List<String> result = await api.getTokenIdByBatch("2023");
+      await sendNotification(result, heading.value.text, message.value.text);
+    } else {
+      Fluttertoast.showToast(
+          backgroundColor: Colors.redAccent,
+          msg: "Content Required !",
+          textColor: Colors.white, // message
+          toastLength: Toast.LENGTH_SHORT, // length
+          gravity: ToastGravity.SNACKBAR, // location
+          timeInSecForIosWeb: 1 // duration
+          );
+    }
   }
 
   Future<void> sendNotification(
       List<String?> tokenIdList, String heading, String contents) async {
     print("Notification Success!");
+    Fluttertoast.showToast(
+        backgroundColor: Colors.amberAccent,
+        msg: "Notification sent successfully!",
+        textColor: Colors.black, // message
+        toastLength: Toast.LENGTH_SHORT, // length
+        gravity: ToastGravity.SNACKBAR, // location
+        timeInSecForIosWeb: 1 // duration
+        );
+
+    String result = "";
+    NotificationApi api = NotificationApi();
+    await api
+        .storeNotification(heading, contents, "2023")
+        .then((value) => {result = value});
     await post(
       Uri.parse('https://onesignal.com/api/v1/notifications'),
       headers: <String, String>{
