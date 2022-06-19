@@ -24,7 +24,7 @@ class NotificationApi {
   Future<String> storeNotification(String heading, String message, String batch) async {
     print("Success");
       final response = await _dio.post('/storeNotification',
-          data: {"heading": heading, "message": message, "batch": batch});
+          data: {"heading": heading, "message": message, "batch": batch,"is_active":"true"});
       return "Success";
   }
 }
