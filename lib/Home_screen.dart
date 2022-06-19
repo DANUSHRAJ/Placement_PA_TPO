@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     loading = true;
     _getAllStatus();
-    Future.delayed(const Duration(milliseconds: 6000), () {
+    Future.delayed(const Duration(milliseconds: 7000), () {
       print("Time Over");
       print(success);
       loading = false;
