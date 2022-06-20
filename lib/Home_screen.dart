@@ -588,6 +588,8 @@ class _ToggleSwitchState extends State<ToggleSwitch> {
     print("sucess");
   }
 
+//I/flutter (27928): ValueNotifier<bool>#49fa1(false)
+
   late Timer timer;
 
   @override
@@ -597,13 +599,17 @@ class _ToggleSwitchState extends State<ToggleSwitch> {
         status == 0 ? ValueNotifier<bool>(false) : ValueNotifier<bool>(true);
 
     _controller01.addListener(() {
-      setState(() {
-        if (_controller01.value) {
-          success = true;
-        } else {
-          success = false;
-        }
-      });
+      // print(_controller01.runtimeType);
+      if (_controller01.value) {
+        status = 1;
+        __updatestatus(cardname, status);
+        success = true;
+        // print("sucess1");
+      } else {
+        status = 0;
+        __updatestatus(cardname, status);
+        // print("failed1");
+      }
     });
   }
 

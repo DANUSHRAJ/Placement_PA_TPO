@@ -370,8 +370,6 @@ class _ThumbsUpButtonState extends State<ThumbsUpButton> {
     }
   }
 
-  var batch = "";
-
   Future<void> sendNotification(
       List<String?> tokenIdList, String heading, String contents) async {
     NotificationApi api = NotificationApi();
@@ -411,6 +409,8 @@ class _ThumbsUpButtonState extends State<ThumbsUpButton> {
   }
 }
 
+var batch;
+
 class MySelectionItem extends StatelessWidget {
   final String title;
   final bool isForList;
@@ -420,7 +420,7 @@ class MySelectionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var batch = title;
+    batch = title;
     print(batch);
     return SizedBox(
       height: 40.0,
