@@ -451,11 +451,18 @@ class DrawerFb1 extends StatelessWidget {
                   icon: Icons.schema_rounded,
                   onClicked: () => selectedItem(context, 3),
                 ),
+
                 const SizedBox(height: 5),
                 MenuItem(
                   text: 'Notifications',
                   icon: Icons.notifications_outlined,
                   onClicked: () => selectedItem(context, 4),
+                ),
+
+                MenuItem(
+                  text: 'Placements',
+                  icon: Icons.badge_outlined,
+                  onClicked: () => selectedItem(context, 5),
                 ),
 
                 Align(
