@@ -77,6 +77,7 @@ class _IntershipState extends State<Intership> {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
         extendBodyBehindAppBar: true,
+        backgroundColor: Colors.blueGrey.shade900,
         appBar: AppBar(
           title: Text(
             "INTERNSHIP",
@@ -88,7 +89,7 @@ class _IntershipState extends State<Intership> {
           ),
           centerTitle: true,
           leading: _backButton(),
-          backgroundColor: Color.fromRGBO(30, 9, 23, 1),
+          backgroundColor: Colors.blueGrey.shade900,
           elevation: 0,
         ),
         body: SafeArea(
@@ -106,12 +107,6 @@ class _IntershipState extends State<Intership> {
               child: Align(
                   alignment: Alignment.topLeft,
                   child: Stack(children: <Widget>[
-                    Container(
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage('assets/images/Bg.jpeg'),
-                              fit: BoxFit.cover)),
-                    ),
                     SingleChildScrollView(
                         child: Column(children: [
                       CardFb1(text: "Explore", onPressed: () {}),

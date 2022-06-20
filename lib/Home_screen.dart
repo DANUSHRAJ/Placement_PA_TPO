@@ -47,8 +47,14 @@ class _HomeScreenState extends State<HomeScreen> {
       itemCount: 1,
       shrinkWrap: true,
       itemBuilder: (context, index) => Column(
-        mainAxisSize: MainAxisSize.min,
+        // mainAxisSize: MainAxisSize.min,
         children: [
+          Divider(
+            indent: 150,
+            endIndent: 150,
+            thickness: 5,
+            color: Colors.orange,
+          ),
           //  SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -64,6 +70,8 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
+
+          SizedBox(height: 20),
 
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -154,44 +162,10 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            SizedBox(
-              height: 30,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                IconButton(
-                  icon: const Icon(
-                    Icons.menu,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        PageTransition(
-                            type: PageTransitionType.leftToRightWithFade,
-                            child: const ZoomDrawerTest()));
-                  },
-                ),
-                Text(
-                  'Welcome back, ',
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.adventPro(
-                      color: Colors.orange,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  ' Admin',
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.adventPro(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
+            // SizedBox(
+            //   height: 30,
+            // ),
+
             SizedBox(
               height: 30,
             ),
@@ -243,15 +217,61 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: loading
-          ? Center(child: Lottie.asset('assets/images/loading1.json'))
-          : Center(
+    return loading
+        ? Center(child: Lottie.asset('assets/images/loading1.json'))
+        : Scaffold(
+            backgroundColor: Colors.black,
+            drawer: const ClipRRect(
+              borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(35),
+                  bottomRight: Radius.circular(35)),
+              child: DrawerFb1(),
+            ),
+            appBar: AppBar(
+              backgroundColor: Colors.blueGrey.shade900,
+              leading: Builder(
+                builder: (BuildContext context) {
+                  return IconButton(
+                    icon: const Icon(
+                      Icons.menu_rounded,
+                      size: 30,
+                    ),
+                    onPressed: () {
+                      Scaffold.of(context).openDrawer();
+                    },
+                    tooltip:
+                        MaterialLocalizations.of(context).openAppDrawerTooltip,
+                  );
+                },
+              ),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    'Welcome back, ',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.adventPro(
+                        color: Colors.orange,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    ' Admin',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.adventPro(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+            body: Center(
               child: DraggableHome(
+                alwaysShowTitle: false,
                 appBarColor: Colors.blueGrey.shade900,
                 title: Text(
-                  'HOMEPAGE ',
+                  'Toggle Menu',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.adventPro(
                       color: Colors.orange,
@@ -260,106 +280,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 headerWidget: headerWidget(context),
 
-                body: [
-                  listView()
-                  // Container(
-                  //   decoration: BoxDecoration(
-                  //       image: DecorationImage(
-                  //           image: AssetImage('assets/images/Bg.jpeg'),
-                  //           fit: BoxFit.cover)),
-                  // ),
-                  // Column(
-                  //   mainAxisSize: MainAxisSize.min,
-                  //   children: [
-                  //     SizedBox(height: height * .2),
-                  //     Padding(
-                  //       padding: const EdgeInsets.all(8.0),
-                  //       child: Align(
-                  //         alignment: Alignment.centerLeft,
-                  //         child: Text(
-                  //           'Toggle Menu',
-                  //           textAlign: TextAlign.center,
-                  //           style: GoogleFonts.adventPro(
-                  //               fontSize: 20,
-                  //               color: Colors.orange,
-                  //               fontWeight: FontWeight.bold),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //     Row(
-                  //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  //       children: [
-                  //         CardFb1(
-                  //             text: "PROFILE",
-                  //             cardname: "profile",
-                  //             status: switch1,
-                  //             imageUrl:
-                  //                 "https://assets7.lottiefiles.com/private_files/lf30_LOw4AL.json",
-                  //             subtitle: "__ __",
-                  //             onPressed: () {}),
-                  //         CardFb1(
-                  //             text: "INTERNSHIPS",
-                  //             cardname: "interns",
-                  //             status: switch2,
-                  //             imageUrl:
-                  //                 "https://assets3.lottiefiles.com/packages/lf20_m0ze3ipv.json",
-                  //             subtitle: "__ ___",
-                  //             onPressed: () {}),
-                  //       ],
-                  //     ),
-                  //     SizedBox(
-                  //       height: height * .05,
-                  //     ),
-                  //     Row(
-                  //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  //       children: [
-                  //         CardFb1(
-                  //             text: "WORKSHOPS",
-                  //             cardname: "workshop",
-                  //             status: switch3,
-                  //             imageUrl:
-                  //                 "https://assets7.lottiefiles.com/private_files/lf30_LOw4AL.json",
-                  //             subtitle: "__ __",
-                  //             onPressed: () {}),
-                  //         CardFb1(
-                  //             text: "COURSES",
-                  //             cardname: "course",
-                  //             status: switch4,
-                  //             imageUrl:
-                  //                 "https://assets7.lottiefiles.com/private_files/lf30_LOw4AL.json",
-                  //             subtitle: "__ __",
-                  //             onPressed: () {}),
-                  //       ],
-                  //     ),
-                  //     SizedBox(
-                  //       height: height * .05,
-                  //     ),
-                  //     Row(
-                  //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  //       children: [
-                  //         CardFb1(
-                  //             text: "PLACEMENTS",
-                  //             cardname: "placements",
-                  //             status: switch5,
-                  //             imageUrl:
-                  //                 "https://assets7.lottiefiles.com/private_files/lf30_LOw4AL.json",
-                  //             subtitle: "__ __",
-                  //             onPressed: () {}),
-                  //       ],
-                  //     ),
-                  //     SizedBox(
-                  //       height: height * .2,
-                  //     ),
-                  //   ],
-                  // ),
-                ],
-                //    fullyStretchable: true,
-                // expandedBody: const CameraPreview(),
+                body: [listView()],
+                fullyStretchable: false,
+                // expandedBody: const DrawerFb1(),
                 backgroundColor: Colors.blueGrey.shade900,
                 // appBarColor: Colors.teal,
               ),
             ),
-    );
+          );
   }
 }
 
@@ -484,6 +412,7 @@ class DrawerFb1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: Material(
+        type: MaterialType.card,
         color: Colors.orange,
         child: ListView(
           children: <Widget>[
@@ -491,6 +420,12 @@ class DrawerFb1 extends StatelessWidget {
               padding: const EdgeInsets.all(15.0),
               child: Column(children: [
                 const SizedBox(height: 12),
+                Divider(
+                  indent: 10,
+                  endIndent: 10,
+                  thickness: 5,
+                  color: Colors.blueGrey.shade900,
+                ),
                 // const SearchFieldDrawer(),
                 // const SizedBox(height: 12),
                 MenuItem(
@@ -506,27 +441,23 @@ class DrawerFb1 extends StatelessWidget {
                 ),
                 const SizedBox(height: 5),
                 MenuItem(
-                  text: 'Workflow',
-                  icon: Icons.workspaces_outline,
+                  text: 'Intership',
+                  icon: Icons.layers_outlined,
                   onClicked: () => selectedItem(context, 2),
                 ),
                 const SizedBox(height: 5),
                 MenuItem(
-                  text: 'Updates',
-                  icon: Icons.update,
+                  text: 'Workshop',
+                  icon: Icons.schema_rounded,
                   onClicked: () => selectedItem(context, 3),
                 ),
+                const SizedBox(height: 5),
                 MenuItem(
                   text: 'Notifications',
                   icon: Icons.notifications_outlined,
-                  onClicked: () => selectedItem(context, 5),
+                  onClicked: () => selectedItem(context, 4),
                 ),
-                MenuItem(
-                  text: 'Settings',
-                  icon: Icons.settings,
-                  onClicked: () => selectedItem(context, 6),
-                ),
-                const SizedBox(height: 100),
+
                 Align(
                   alignment: Alignment.bottomLeft,
                   child: MenuItem(
@@ -586,8 +517,18 @@ class DrawerFb1 extends StatelessWidget {
             context, MaterialPageRoute(builder: (context) => const FormHome()));
 
         break;
+      case 2:
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const Intership()));
 
-      case 5:
+        break;
+      // case 3:
+      //   Navigator.push(
+      //       context, MaterialPageRoute(builder: (context) => const FormHome()));
+
+      //   break;
+
+      case 4:
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => const Notifications(), // Page 1
         ));
@@ -618,64 +559,6 @@ class MenuItem extends StatelessWidget {
       title: Text(text, style: TextStyle(color: color)),
       hoverColor: hoverColor,
       onTap: onClicked,
-    );
-  }
-}
-
-class SearchFieldDrawer extends StatelessWidget {
-  const SearchFieldDrawer({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final color = Colors.white;
-
-    return TextField(
-      style: TextStyle(color: color, fontSize: 14),
-      decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-        hintText: 'Search',
-        hintStyle: TextStyle(color: color),
-        prefixIcon: Icon(
-          Icons.search,
-          color: color,
-          size: 20,
-        ),
-        filled: true,
-        fillColor: Colors.white12,
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: color.withOpacity(0.7)),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: color.withOpacity(0.7)),
-        ),
-      ),
-    );
-  }
-}
-
-class ZoomDrawerTest extends StatefulWidget {
-  const ZoomDrawerTest({Key? key}) : super(key: key);
-
-  @override
-  _ZoomDrawerTestState createState() => _ZoomDrawerTestState();
-}
-
-class _ZoomDrawerTestState extends State<ZoomDrawerTest> {
-  @override
-  Widget build(BuildContext context) {
-    return ZoomDrawer(
-      style: DrawerStyle.Style1,
-      menuScreen: HomeScreen(),
-      mainScreen: const DrawerFb1(),
-      borderRadius: 20.0,
-      //showShadow: true,
-      angle: -15.0,
-      backgroundColor: Colors.transparent,
-      slideWidth: MediaQuery.of(context).size.width * .5,
-      openCurve: Curves.easeIn,
-      closeCurve: Curves.easeInOut,
     );
   }
 }
@@ -863,7 +746,7 @@ class PromoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: 150,
+      height: 180,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           gradient: const LinearGradient(
