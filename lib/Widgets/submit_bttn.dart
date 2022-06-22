@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:admin_sjit_pp/API/exportData.api.dart';
 import 'package:admin_sjit_pp/API/toggle.api.dart';
 import 'package:admin_sjit_pp/Home_screen.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,19 @@ class _SubmitBttnState extends State<SubmitBttn> {
     configOneSignal();
   }
 
+  Future<void> downloadData(String colName, String mailId, String batch) async {
+    ExportDataApi api = ExportDataApi();
+    mailId = mailId.trim();
+    var response = await api.sendDataToMail(colName, batch, mailId);
+    response = response.toString();
+    if(response == "Success"){
+      print("Success");
+    }
+    else{
+      print("No Data Found!");
+    }
+  }
+
   Future<void> sendNotification(
       List<String?> tokenIdList, String heading, String contents) async {
     await post(
@@ -53,6 +67,7 @@ class _SubmitBttnState extends State<SubmitBttn> {
         "contents": {"en": contents},
       }),
     );
+    await downloadData("profile", "anishgone@gmail.com", "2023");
   }
 
   Future<void> generateNotification() async {

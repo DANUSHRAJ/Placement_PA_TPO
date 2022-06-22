@@ -25,11 +25,17 @@ server_router.get("/dwnDataJSON", service.dwnDataJSON);
 //http://localhost:8080/dwnData
 server_router.get("/dwnData", service.dwnData);
 
+//http://localhost:8080/sendDataToMail
+server_router.post("/sendDataToMail", service.sendDataToMail);
+
 //http://localhost:8080/getTokenIdByBatchNew
 server_router.post("/getTokenIdByBatchNew", service.getTokenIdByBatchNew);
 
 //http://localhost:8080/storeNotification
 server_router.post("/storeNotification", service.storeNotification);
+
+//http://localhost:8080/displayNotification
+server_router.post("/displayNotification", service.displayNotification);
 
 //http://localhost:8080/getaccounts
 server_router.get("/getaccounts", service.getaccounts);

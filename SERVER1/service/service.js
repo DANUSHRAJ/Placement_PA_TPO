@@ -10,6 +10,9 @@ const serviceAccount = require('./placement-portal-56d18-firebase-adminsdk-v7pqd
 
 var exportFromJSON = require('export-from-json');
 
+var ExcelJs = require('exceljs');
+var nodemailer = require('nodemailer');
+
 module.exports.uploadForm = async (req, res) => {
     try {
         const result = await client.db("Cluster0").collection("forms").insertOne(req.body);
@@ -118,6 +121,93 @@ module.exports.dwnData = async (req, res) => {
             console.log("Done writing accounts to file");
         });
 }
+
+module.exports.sendDataToMail = async (req, res) => {
+    try {
+        let colName = req.body.colName;
+        let batch = req.body.batch;
+        let emailId = req.body.mailId;
+
+        // Fetch all records
+        let dataElements = await client.db("Cluster0").collection(colName).find({'batch':batch});
+
+        // Convert to array
+        var resultfinal = [];
+        await dataElements.forEach(element => {
+            resultfinal.push(element);
+        });
+        dataElements = resultfinal;
+        if(dataElements. length > 0) {
+            // Create Excel Book
+            const workbook = new ExcelJs.Workbook();
+            const worksheet = workbook.addWorksheet(colName.toUpperCase() + ' Details - Batch '+batch);
+
+            // Add all column values
+            let colVal = [];
+            colVal.push({ header: 'S.no', key: 's_no', width: 10 });
+            let element = dataElements[0];
+            Object.keys(element).forEach(function (keyVal) {
+                colVal.push({ header: keyVal.toString().toUpperCase(), key: keyVal.toString(), width: 10});
+            });
+
+            console.log("Success");
+
+            // Assign to worksheet.columns at once
+            worksheet.columns = colVal;
+
+            // Feed value for S. No.
+            let count = 1;
+            dataElements.forEach(dataElem => {
+                dataElem.s_no = count;
+                worksheet.addRow(dataElem);
+                count += 1;
+            });
+
+            // Bold the 1st Row - Heading
+            worksheet.getRow(1).eachCell((cell) => {
+                cell.font = { bold: true };
+            });
+
+            // Excel Write
+            const data = await workbook.xlsx.writeFile(__dirname + '/Datas/'+(colName.toUpperCase() + ' Details - Batch '+batch)+'.xlsx');
+
+            // Mail using nodemailer
+            // App name: admin_sjit_pp -----  DONT CHANGE IT
+            var mail = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'sjitplacemantportal@gmail.com',
+                    pass: 'auhshenznbmgoyks'
+                }
+            });
+            var mailOptions = {
+                from: 'sjitplacemantportal@gmail.com',
+                to: emailId,
+                subject: (colName.toUpperCase() + ' Details - Batch '+batch),
+                text: (colName.toUpperCase() + ' Details - Batch '+ batch) + ' is attached with this mail. Thanks & Regards SJIT Placement Portal',
+                attachments: [
+                    {
+                        filename: (colName.toUpperCase() + ' Details - Batch '+batch)+'.xlsx',
+                        path: __dirname + '/Datas/'+(colName.toUpperCase() + ' Details - Batch '+batch)+'.xlsx'
+                    }
+                ]
+            }
+            mail.sendMail(mailOptions, function(error, info){
+                if (error) {
+                console.log(error);
+                } else {
+                console.log('Email sent: ' + info.response);
+                }
+            });
+            res.send("Success");
+        } else {
+            res.send("No Data Found!");
+        }
+    } catch (e) {
+        res.status(500).send(e);
+    }
+}
+
 module.exports.getTokenIdByBatchNew = async (req, res) => {
     try {
         let batchval = req.body.batch;
@@ -135,12 +225,25 @@ module.exports.getTokenIdByBatchNew = async (req, res) => {
     }
 };
 
-//http://localhost:8080/    kjnrfgkjdfnkjergkjdkj
-
 module.exports.storeNotification = async (req, res) => {
     try {
         const result = await client.db("Cluster0").collection("notification").insertOne(req.body);
         res.send("Success");
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+module.exports.displayNotification = async (req, res) => {
+    try {
+        const result = await client.db("Cluster0").collection("notification").find({
+            'batch': req.body.batch
+        });
+        var resultfinal = [];
+        await result.forEach(element => {
+            resultfinal.push(element);
+        });
+        res.send(resultfinal);
     } catch (err) {
         console.log(err);
     }
