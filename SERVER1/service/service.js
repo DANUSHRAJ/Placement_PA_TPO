@@ -39,14 +39,8 @@ module.exports.updateToggleStatus = async (req, res) => {
     try {
         var colls = req.body.colls;
         var value = req.body.value;
-        const result = await client.db("Cluster0").collection(colls).find({ "status": { "$in": [0, 1] } });
-        var resultfinal = [];
-        await result.forEach(element => {
-            resultfinal.push(element);
-        });
-        var statusval = resultfinal[0].status;
-        await client.db("Cluster0").collection(colls).updateMany(
-            { status: statusval },
+        await client.db("Cluster0").collection("collectionStatus").updateOne(
+            { colName: colls },
             { $set: { status: value } },
             (err1, result1) => {
                 if (err1)
@@ -62,7 +56,7 @@ module.exports.updateToggleStatus = async (req, res) => {
 module.exports.getCurrentToggleStatus = async (req, res) => {
     try {
         var colls = req.body.colls;
-        const result = await client.db("Cluster0").collection(colls).find({ "status": { "$in": [0, 1] } });
+        const result = await client.db("Cluster0").collection("collectionStatus").find({ colName : colls });
         var resultfinal = [];
         await result.forEach(element => {
             resultfinal.push(element);
