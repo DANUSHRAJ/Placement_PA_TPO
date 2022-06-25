@@ -186,8 +186,8 @@ class _HomeScreenState extends State<HomeScreen> {
     ToggleApi api = ToggleApi();
     var result1 = await api.getCurrentToogleStatus(cardname).then((value) {
       isSwitched = value == "1" ? 1 : 0;
-      // print("sucess");
-      // print(isSwitched);
+      print("sucess");
+      print(isSwitched);
     });
     return isSwitched;
   }

@@ -34,10 +34,9 @@ class _SubmitBttnState extends State<SubmitBttn> {
     mailId = mailId.trim();
     var response = await api.sendDataToMail(colName, batch, mailId);
     response = response.toString();
-    if(response == "Success"){
+    if (response == "Success") {
       print("Success");
-    }
-    else{
+    } else {
       print("No Data Found!");
     }
   }
@@ -88,7 +87,7 @@ class _SubmitBttnState extends State<SubmitBttn> {
       child: InkWell(
         onTap: () async {
           //await changeToggle();
-          await generateNotification();
+          //await generateNotification();
           //HomePage
           //HomeScreen
           Navigator.push(
