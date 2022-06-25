@@ -87,7 +87,7 @@ class _SubmitBttnState extends State<SubmitBttn> {
       child: InkWell(
         onTap: () async {
           //await changeToggle();
-          //await generateNotification();
+          // await generateNotification();
           //HomePage
           //HomeScreen
           Navigator.push(

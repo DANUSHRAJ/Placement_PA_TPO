@@ -214,9 +214,9 @@ class _CreateFormState extends State<CreateForm> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15.0),
-        image: const DecorationImage(
-            image: AssetImage('assets/images/toggle_bg1.png'),
-            fit: BoxFit.fill),
+        // image: const DecorationImage(
+        //     image: AssetImage('assets/images/toggle_bg1.png'),
+        //     fit: BoxFit.fill),
         color: Colors.white,
       ),
       padding: const EdgeInsets.all(10),
