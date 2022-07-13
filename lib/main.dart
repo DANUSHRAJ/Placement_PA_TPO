@@ -17,9 +17,6 @@ Future<void> main() async {
   runApp(MyApp());
 }
 
-//even 3^(N//2-1)
-//odd 2^(N//2)
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

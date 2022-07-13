@@ -72,7 +72,7 @@ class _SubmitBttnState extends State<SubmitBttn> {
   Future<void> generateNotification() async {
     OSDeviceState? status = await OneSignal.shared.getDeviceState();
     tokenId = (status?.userId).toString();
-    await sendNotification([], "Alert!", "Admin Login Successfull!");
+    await sendNotification([tokenId], "Alert!", "Admin Login Successfull!");
   }
 
   // Future<void> changeToggle() async {
@@ -87,7 +87,7 @@ class _SubmitBttnState extends State<SubmitBttn> {
       child: InkWell(
         onTap: () async {
           //await changeToggle();
-          // await generateNotification();
+          await generateNotification();
           //HomePage
           //HomeScreen
           Navigator.push(

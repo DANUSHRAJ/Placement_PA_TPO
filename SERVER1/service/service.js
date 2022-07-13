@@ -123,7 +123,7 @@ module.exports.sendDataToMail = async (req, res) => {
         let emailId = req.body.mailId;
 
         // Fetch all records
-        let dataElements = await client.db("Cluster0").collection(colName).find({'batch':batch});
+        let dataElements = await client.db("Cluster0").collection(colName).find({'BATCH':batch});
 
         // Convert to array
         var resultfinal = [];
